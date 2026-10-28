@@ -6,7 +6,7 @@ dash upgrades, automatic weapons, stackable effects, eight enemy archetypes and 
 **Play:** https://Trezza10.github.io/vector-fall/
 
 Keyboard/mouse and controllers work on desktop. Phones get one combined MOVE + AIM
-floating pad anywhere on screen, plus bottom-left DASH, PAUSE and RESET. Both orientations are supported. The Play screen also offers
+floating pad anywhere on screen, plus a bottom-left dash icon and PAUSE. Both orientations are supported. The Play screen also offers
 **Use touch controls** for previewing the phone controls on desktop. Browser audio starts
 with interaction; settings persist per browser/device when storage is allowed.
 
@@ -76,4 +76,6 @@ required to play this build.
 
 Portrait phones use a taller camera layout, top health display and a fullscreen floating steering pad. Both orientations work without reloading. Violet Silencers warn with a radius ring before applying a 2.5-second firing lock; leave the ring before the pulse to evade it. Movement and dash remain available.
 
-Mobile: touch anywhere outside the buttons to place a floating steering origin, then drag to move and aim together. Release to brake and keep firing in the last direction. Tap bottom-left DASH to dash; another finger can keep steering. Pause, reset and dash areas never start steering. Retouching only repositions the pad.
+Mobile: touch anywhere outside the buttons to place a floating steering origin, then drag to move and aim together. Release to brake and keep firing in the last direction. Tap the bottom-left chevron icon to dash; another finger can keep steering. Pause and dash areas never start steering. Retouching only repositions the pad.
+
+Mobile HUD stays minimal: health, pause and the dash icon. The icon dims when no dash charges remain. Fullscreen is under Pause > Settings > Graphics (browser support varies); desktop F11 still works. Restart a browser run from the pause menu with Reload game.

@@ -152,3 +152,8 @@ func apply_portrait_layout(portrait: bool) -> void:
 	_zoom_slider().custom_minimum_size.y = 90.0 if portrait else 48.0
 	for bus: String in ["Master", "Combat", "Effects", "UI"]:
 		_sound_content().get_node(bus + "Row/Volume").custom_minimum_size.y = 80.0 if portrait else 0.0
+
+func _on_fullscreen_pressed() -> void:
+	$ClickSound.trigger()
+	var fullscreen: bool = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if fullscreen else DisplayServer.WINDOW_MODE_FULLSCREEN)

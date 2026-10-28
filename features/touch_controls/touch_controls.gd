@@ -1,7 +1,6 @@
 class_name PlaygroundTouchControls
 extends CanvasLayer
 
-signal reset_requested
 @export var force_show: bool = false
 @onready var _move: TouchStick = $MoveStick
 var _player: PlaygroundPlayer
@@ -15,7 +14,6 @@ func configure(player: PlaygroundPlayer, menu: PlaygroundPauseMenu) -> void:
 	_move.changed.connect(_on_move)
 	$Dash.pressed.connect(_on_dash)
 	$Pause.pressed.connect(_on_pause)
-	$Reset.pressed.connect(_on_reset)
 	player.reset_performed.connect(_clear_sticks)
 	_enabled = force_show or OS.get_cmdline_user_args().has("--touch-controls") or DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")
 	_player.touch_input_enabled = _enabled
@@ -37,9 +35,8 @@ func _process(_delta: float) -> void:
 	_move.enabled = not paused
 	var viewport: Vector2 = get_viewport().get_visible_rect().size
 	$Dash.position = Vector2(32, viewport.y - 160)
-	$Dash/Label.text = "DASH\n%d/%d" % [_player.dash_charges, _player.max_dash_charges]
+	$Dash.modulate = Color.WHITE if _player.dash_charges > 0 else Color(0.4, 0.5, 0.5, 0.65)
 	$Pause.position = Vector2(viewport.x - 162, 24)
-	$Reset.position = Vector2(viewport.x - 162, 130)
 
 func _on_move(value: Vector2) -> void:
 	if _player != null:
@@ -52,9 +49,6 @@ func _on_dash() -> void:
 
 func _on_pause() -> void:
 	if _menu != null: _menu.set_paused(not get_tree().paused)
-
-func _on_reset() -> void:
-	if not get_tree().paused: reset_requested.emit()
 
 func _clear_sticks() -> void:
 	_move.reset_stick()

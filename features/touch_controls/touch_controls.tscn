@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 [ext_resource type="Script" path="res://features/touch_controls/touch_controls.gd" id="script"]
 [ext_resource type="Script" path="res://features/touch_controls/touch_stick.gd" id="stick"]
 [ext_resource type="Texture2D" path="res://features/touch_controls/touch_button.svg" id="button"]
+[ext_resource type="Texture2D" path="res://features/touch_controls/dash_icon.svg" id="dash_icon"]
 [sub_resource type="StyleBoxFlat" id="Base"]
 bg_color = Color(0.03, 0.12, 0.15, 0.55)
 border_width_left = 2
@@ -30,7 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("stick")
-excluded_buttons = Array[NodePath]([NodePath("../Dash"), NodePath("../Pause"), NodePath("../Reset")])
+excluded_buttons = Array[NodePath]([NodePath("../Dash"), NodePath("../Pause")])
 [node name="Base" type="Panel" parent="MoveStick"]
 visible = false
 offset_right = 280.0
@@ -44,16 +45,8 @@ offset_bottom = 56.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Thumb")
 [node name="Dash" type="TouchScreenButton" parent="."]
-texture_normal = ExtResource("button")
+texture_normal = ExtResource("dash_icon")
 shape = SubResource("ButtonShape")
-[node name="Label" type="Label" parent="Dash"]
-offset_right = 140.0
-offset_bottom = 90.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-vertical_alignment = 1
-text = "DASH"
 [node name="Pause" type="TouchScreenButton" parent="."]
 texture_normal = ExtResource("button")
 shape = SubResource("ButtonShape")
@@ -65,14 +58,3 @@ theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 vertical_alignment = 1
 text = "PAUSE"
-[node name="Reset" type="TouchScreenButton" parent="."]
-texture_normal = ExtResource("button")
-shape = SubResource("ButtonShape")
-[node name="Label" type="Label" parent="Reset"]
-offset_right = 140.0
-offset_bottom = 90.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-vertical_alignment = 1
-text = "RESET"

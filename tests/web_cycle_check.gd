@@ -48,7 +48,7 @@ func _check() -> void:
 	move._input(finger)
 	assert(player._movement_input() == Vector2.ZERO and player.shooting_direction().x > 0.9)
 	assert(not move.get_node("Base").visible)
-	touch._on_reset()
+	lab.reset_playground()
 	# Reposition near another screen edge; retouch must never dash.
 	finger.pressed = true
 	finger.position = Vector2(300, 600)
@@ -63,16 +63,24 @@ func _check() -> void:
 	menu.set_paused(false)
 	await process_frame
 	player.receive_enemy_hit(20)
-	touch._on_reset()
+	lab.reset_playground()
 	assert(player.current_hp == player.max_hp and not player.is_dashing)
 	# All authored buttons reserve touch space even when no steering finger is held.
-	for name: String in ["Dash", "Pause", "Reset"]:
+	for name: String in ["Dash", "Pause"]:
 		var button: TouchScreenButton = touch.get_node(name)
 		var at: Vector2 = button.global_position + Vector2(70, 45)
 		assert(not move.can_start_at(at))
 		finger.position = at
 		move._input(finger)
 		assert(move._finger == -1 and player.touch_move == Vector2.ZERO)
+	lab._update_combat_hud()
+	assert(not touch.has_node("Reset") and not dash.has_node("Label"))
+	assert(dash.texture_normal.resource_path.ends_with("dash_icon.svg"))
+	assert(not lab.get_node("CanvasLayer/DashMeter").visible)
+	assert(not lab.get_node("CanvasLayer/DashHint").visible)
+	assert(not lab.get_node("CanvasLayer/PlayerHealthHint").visible)
+	assert(lab.get_node("CanvasLayer/PlayerHealth").visible)
+	assert(menu.has_node("Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content/Fullscreen"))
 	print("PASS: single-threaded web config, mobile renderer, fullscreen floating move/aim, extra-finger rejection, real simultaneous dash button, retained aim, reserved button zones, pause and reset")
 	lab.queue_free()
 	await create_timer(0.5).timeout

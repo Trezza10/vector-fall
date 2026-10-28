@@ -385,3 +385,10 @@ text = "0%: original view / 100%: twice as close.
 Default: 50%. HUD and touch controls keep their size."
 autowrap_mode = 3
 theme_override_font_sizes/font_size = 16
+
+[node name="Fullscreen" type="Button" parent="Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 90)
+text = "Toggle fullscreen"
+
+[connection signal="pressed" from="Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content/Fullscreen" to="." method="_on_fullscreen_pressed"]

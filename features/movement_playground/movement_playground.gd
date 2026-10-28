@@ -23,7 +23,6 @@ func _ready() -> void:
 	$PlayerDamageFeedback.configure(_player, _camera, _player_health)
 	_player_health.set_health(_player.current_hp, _player.max_hp, false)
 	$TouchControls.configure(_player, _pause_menu)
-	$TouchControls.reset_requested.connect(reset_playground)
 	_preferences.load_preferences()
 	_preferences.apply_audio()
 	_apply_camera_zoom(_preferences.camera_zoom_percent)
@@ -46,6 +45,9 @@ func _update_combat_hud() -> void:
 	$CanvasLayer/EnemyHint.text = "< HOSTILE FIELD   /   Hits: %d   /   R resets" % _player.hits_taken
 	_modifier_label.text = _player.shooter.modifier_summary()
 	_modifier_panel.reset_size()
+	_dash_hint.visible = not _player.touch_input_enabled
+	_dash_meter.visible = not _player.touch_input_enabled
+	$CanvasLayer/PlayerHealthHint.visible = not _player.touch_input_enabled and get_tree().root.size.x >= get_tree().root.size.y
 	_modifier_panel.visible = not _player.touch_input_enabled
 	$CanvasLayer/Header.visible = not _player.touch_input_enabled
 	$CanvasLayer/ArsenalLabel.visible = not _player.touch_input_enabled
@@ -53,7 +55,7 @@ func _update_combat_hud() -> void:
 	$CanvasLayer/EnemyHint.visible = not _player.touch_input_enabled
 
 func _process(delta: float) -> void:
-	$CanvasLayer/SilenceStatus.visible = _player.shooter.silence_remaining > 0.0 and _player.is_alive
+	$CanvasLayer/SilenceStatus.visible = _player.shooter.silence_remaining > 0.0 and _player.is_alive and not _player.touch_input_enabled
 	$CanvasLayer/SilenceStatus.text = "SILENCED / %.1fs" % _player.shooter.silence_remaining
 	_dash_meter.value = 1.0 - _player.dash_cooldown_remaining / _player.effective_dash_cooldown
 	_dash_hint.text = "SPACE / RB  Dash %d/%d  |  %.2fs recharge" % [
@@ -113,4 +115,4 @@ func _update_phone_layout() -> void:
 	health.anchor_bottom = health.anchor_top
 	health.offset_top = 48.0 if portrait else -118.0
 	health.offset_bottom = health.offset_top + 24.0
-	hint.visible = not portrait
+	hint.visible = not portrait and not _player.touch_input_enabled
