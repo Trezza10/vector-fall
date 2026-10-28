@@ -18,6 +18,10 @@ var _preferences: ControlPreferences
 
 func _ready() -> void:
 	_overlay.hide()
+	if OS.has_feature("web") and not JavaScriptBridge.eval("typeof document.documentElement.requestFullscreen === 'function'"):
+		var fullscreen_button: Button = $Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content/Fullscreen
+		fullscreen_button.disabled = true
+		fullscreen_button.text = "Fullscreen unavailable"
 	if OS.has_feature("web"): $Overlay/Center/Panel/Margin/Main/Quit.text = "Reload game"
 	for bus: String in ["Master", "Combat", "Effects", "UI"]:
 		var slider: HSlider = _sound_content().get_node(bus + "Row/Volume")
