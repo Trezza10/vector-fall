@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 from install_godot_web import ROOT, install, runtime_env
 
-CHECKS = ['web_cycle_check', 'player_health_check', 'enemy_check', 'damage_healing_check']
+CHECKS = ['pause_settings_check', 'web_cycle_check', 'player_health_check', 'enemy_check', 'damage_healing_check']
 
 
 def run(editor, args, timeout=180):

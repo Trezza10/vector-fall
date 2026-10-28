@@ -170,7 +170,7 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="Graphics — WIP" type="MarginContainer" parent="Overlay/Center/Panel/Margin/Settings/Tabs"]
+[node name="Graphics" type="MarginContainer" parent="Overlay/Center/Panel/Margin/Settings/Tabs"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
@@ -363,3 +363,25 @@ stream = ExtResource("audio_preview_effect")
 bus = &"Effects"
 volume_db = -10.0
 script = ExtResource("audio_script")
+
+[node name="Content" type="VBoxContainer" parent="Overlay/Center/Panel/Margin/Settings/Tabs/Graphics"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ZoomLabel" type="Label" parent="Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content"]
+layout_mode = 2
+text = "CAMERA ZOOM  50%"
+
+[node name="Zoom" type="HSlider" parent="Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+max_value = 100.0
+step = 5.0
+value = 50.0
+
+[node name="Hint" type="Label" parent="Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content"]
+layout_mode = 2
+text = "0%: original view / 100%: twice as close.
+Default: 50%. HUD and touch controls keep their size."
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16

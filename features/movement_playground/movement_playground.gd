@@ -24,6 +24,8 @@ func _ready() -> void:
 	$TouchControls.reset_requested.connect(reset_playground)
 	_preferences.load_preferences()
 	_preferences.apply_audio()
+	_apply_camera_zoom(_preferences.camera_zoom_percent)
+	_pause_menu.camera_zoom_previewed.connect(_apply_camera_zoom)
 	_player.control_mode = _preferences.control_mode
 	_pause_menu.configure(_preferences)
 	_pause_menu.control_mode_applied.connect(_on_control_mode_applied)
@@ -89,3 +91,6 @@ func reset_playground() -> void:
 	$EnemyField.reset_encounter()
 	for shot: Node in $EnemyProjectiles.get_children(): shot.queue_free()
 	_camera.reset_smoothing()
+
+func _apply_camera_zoom(percent: float) -> void:
+	_camera.zoom = Vector2.ONE * (1.0 + clampf(percent, 0.0, 100.0) / 100.0)

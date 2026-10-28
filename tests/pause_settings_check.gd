@@ -56,14 +56,23 @@ func _check() -> void:
 	await process_frame
 	assert(menu.get_node(base + "Settings").visible, "Controller A must open Settings")
 	var tabs: TabContainer = menu.get_node(base + "Settings/Tabs")
-	assert(not tabs.is_tab_disabled(1) and tabs.is_tab_disabled(2), "WIP tabs disabled")
+	assert(not tabs.is_tab_disabled(1) and not tabs.is_tab_disabled(2), "Sound and graphics tabs enabled")
 	var mode: OptionButton = menu.get_node(base + "Settings/Tabs/Controls/Content/Mode")
+	var zoom: HSlider = menu.get_node(base + "Settings/Tabs/Graphics/Content/Zoom")
+	zoom.value = 75.0
+	assert(lab.get_node("Player/Camera2D").zoom == Vector2(1.75, 1.75))
+	menu._on_back_pressed()
+	assert(lab.get_node("Player/Camera2D").zoom == Vector2.ONE * (1.0 + lab._preferences.camera_zoom_percent / 100.0))
+	menu._on_settings_pressed()
+	zoom.value = 75.0
 	mode.select(1)
 	var apply: Button = menu.get_node(base + "Settings/Buttons/Apply")
 	apply.pressed.emit()
 	assert(player.control_mode == PlaygroundPlayer.ControlMode.CURSOR_STEERING)
 	var persisted: ControlPreferences = ControlPreferences.new()
 	persisted.load_preferences()
+	assert(persisted.camera_zoom_percent == 75.0)
+	assert(lab.get_node("Player/Camera2D").zoom == Vector2(1.75, 1.75))
 	assert(persisted.control_mode == PlaygroundPlayer.ControlMode.CURSOR_STEERING)
 	var back: InputEventJoypadButton = InputEventJoypadButton.new()
 	back.button_index = JOY_BUTTON_B
@@ -95,5 +104,5 @@ func _check() -> void:
 	Input.action_press("move_right")
 	assert(player._movement_input() == Vector2.ZERO, "Cursor mode ignores A/S/D")
 	Input.action_release("move_right")
-	print("PASS: controller pause/navigation, frozen gameplay, WIP tabs, apply, saved settings, analog movement and aim")
+	print("PASS: controller pause/navigation, frozen gameplay, zoom preview/revert/persistence, apply, saved settings, analog movement and aim")
 	quit()

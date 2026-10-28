@@ -1,6 +1,8 @@
 class_name PlaygroundPauseMenu
 extends CanvasLayer
 
+signal camera_zoom_previewed(percent: float)
+
 signal control_mode_applied(mode: PlaygroundPlayer.ControlMode)
 
 @onready var _overlay: Control = $Overlay
@@ -26,7 +28,7 @@ func _ready() -> void:
 	_sound_content().get_node("Previews/Shot").pressed.connect($PreviewShot.trigger)
 	_sound_content().get_node("Previews/Effect").pressed.connect($PreviewEffect.trigger)
 	_tabs.tab_changed.connect(_on_tab_changed)
-	_tabs.set_tab_disabled(2, true)
+	_zoom_slider().value_changed.connect(_on_zoom_changed)
 
 func configure(preferences: ControlPreferences) -> void:
 	_preferences = preferences
@@ -48,7 +50,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func set_paused(paused: bool) -> void:
-	if not paused and _preferences != null: _preferences.apply_audio()
+	if not paused and _preferences != null:
+		_preferences.apply_audio()
+		camera_zoom_previewed.emit(_preferences.camera_zoom_percent)
 	get_tree().paused = paused
 	if paused: $PauseSound.trigger()
 	else: $ResumeSound.trigger()
@@ -56,6 +60,7 @@ func set_paused(paused: bool) -> void:
 	if paused: _show_main()
 
 func _show_main() -> void:
+	if _preferences != null: camera_zoom_previewed.emit(_preferences.camera_zoom_percent)
 	if _preferences != null: _preferences.apply_audio()
 	_settings.hide()
 	_main.show()
@@ -71,25 +76,28 @@ func _on_settings_pressed() -> void:
 	_settings.show()
 	_tabs.current_tab = 0
 	_mode.select(int(_preferences.control_mode))
+	_zoom_slider().set_value_no_signal(_preferences.camera_zoom_percent)
+	_on_zoom_changed(_preferences.camera_zoom_percent)
 	for bus: String in _preferences.sound_volumes:
 		var slider: HSlider = _sound_content().get_node(bus + "Row/Volume")
 		slider.set_value_no_signal(_preferences.sound_volumes[bus] * 100.0)
 		_on_volume_changed(slider.value, bus)
 	_sound_content().get_node("Mute").set_pressed_no_signal(_preferences.sound_muted)
 	_preferences.apply_audio()
-	_status.text = "Adjust controls or sound, then Apply & save."
+	_status.text = "Adjust controls, sound or zoom, then Apply & save."
 	_mode.grab_focus()
 
 func _on_apply_pressed() -> void:
 	if _preferences == null: return
 	var selected: PlaygroundPlayer.ControlMode = _mode.get_selected_id() as PlaygroundPlayer.ControlMode
-	if _preferences.save_settings(selected, _current_volumes(), _sound_content().get_node("Mute").button_pressed) != OK:
+	if _preferences.save_settings(selected, _current_volumes(), _sound_content().get_node("Mute").button_pressed, _zoom_slider().value) != OK:
 		_preferences.apply_audio()
+		camera_zoom_previewed.emit(_preferences.camera_zoom_percent)
 		_status.text = "Could not save settings. Your previous settings are still active."
 		return
 	$ClickSound.trigger()
 	control_mode_applied.emit(selected)
-	_status.text = "Saved. Controls and sound will be used next time you launch."
+	_status.text = "Saved. Settings will be used next time you launch."
 
 func _on_back_pressed() -> void:
 	$ClickSound.trigger()
@@ -127,3 +135,10 @@ func _on_preview_pressed() -> void:
 
 func _on_tab_changed(_tab: int) -> void:
 	if _overlay.visible: $ClickSound.trigger()
+
+func _zoom_slider() -> HSlider:
+	return $Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content/Zoom
+
+func _on_zoom_changed(value: float) -> void:
+	$Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content/ZoomLabel.text = "CAMERA ZOOM  %d%%" % roundi(value)
+	camera_zoom_previewed.emit(value)

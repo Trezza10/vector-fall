@@ -464,3 +464,5 @@ assets and a stable launcher avoid service-worker stale builds. Editor-authored 
 sticks and dash/pause/reset buttons make phone play possible; existing desktop inputs remain.
 This authorizes Git initialization and publishing this project to the provided repository,
 without changing its existing public visibility. No recurring automation is introduced.
+
+**Camera zoom (2026-10-28):** User requested a saved zoom setting and a closer default. Graphics now exposes an editor-authored 0–100% slider (camera scale 1–2, default 50% / 1.5x). Existing preferences own persistence; the pause menu emits preview values and restores saved zoom on Back/Resume. The playground applies camera zoom only; HUD/touch sizing stays independent. This supersedes the disabled Graphics tab for this setting.
