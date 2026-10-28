@@ -17,28 +17,36 @@ func _check() -> void:
 	player.touch_input_enabled = true
 	await process_frame
 	var move: TouchStick = touch.get_node("MoveStick")
-	var aim: TouchStick = touch.get_node("AimStick")
-	var left: InputEventScreenTouch = InputEventScreenTouch.new()
-	left.index = 2
-	left.pressed = true
-	left.position = move.get_global_rect().get_center() + Vector2(60, 0)
-	move._input(left)
+	var finger: InputEventScreenTouch = InputEventScreenTouch.new()
+	finger.index = 2
+	finger.pressed = true
+	finger.position = move.get_global_rect().get_center() + Vector2(70, 0)
+	move._input(finger)
 	assert(player._movement_input().x > 0.5)
-	var right: InputEventScreenTouch = InputEventScreenTouch.new()
-	right.index = 3
-	right.pressed = true
-	right.position = aim.get_global_rect().get_center() + Vector2(0, -60)
-	aim._input(right)
-	assert(player.shooting_direction().y < -0.9)
-	left.pressed = false
-	move._input(left)
-	assert(player._movement_input() == Vector2.ZERO and aim.value.y < 0.0)
-	var last_aim: Vector2 = player.shooting_direction()
-	right.pressed = false
-	aim._input(right)
-	assert(player.shooting_direction() == last_aim)
-	touch._on_dash()
-	assert(player.is_dashing)
+	assert(player.shooting_direction().x > 0.9)
+	assert(not player.is_dashing, "First touch must only steer")
+	var extra: InputEventScreenTouch = finger.duplicate()
+	extra.index = 3
+	extra.position = move.get_global_rect().get_center() + Vector2(0, -70)
+	move._input(extra)
+	assert(player.shooting_direction().x > 0.9, "Other fingers cannot steal the pad")
+	finger.pressed = false
+	move._input(finger)
+	assert(player._movement_input() == Vector2.ZERO)
+	assert(player.shooting_direction().x > 0.9, "Release retains aim")
+	# Quick retouch then drag chooses the dash direction before spending a charge.
+	finger.pressed = true
+	finger.position = move.get_global_rect().get_center()
+	move._input(finger)
+	assert(not player.is_dashing, "Wait for directional intent")
+	var drag: InputEventScreenDrag = InputEventScreenDrag.new()
+	drag.index = 2
+	drag.position = move.get_global_rect().get_center() + Vector2(0, -75)
+	move._input(drag)
+	assert(player.is_dashing and player._dash_direction.y < -0.9)
+	var charges: int = player.dash_charges
+	move._input(drag)
+	assert(player.dash_charges == charges, "One dash per retouch")
 	var menu: PlaygroundPauseMenu = lab.get_node("PauseMenu")
 	touch._on_pause()
 	await process_frame
@@ -48,7 +56,25 @@ func _check() -> void:
 	player.receive_enemy_hit(20)
 	touch._on_reset()
 	assert(player.current_hp == player.max_hp and not player.is_dashing)
-	print("PASS: single-threaded web config, mobile renderer, independent multi-touch move/aim, release and retained aim, dash, pause and reset")
+	finger.pressed = true
+	finger.position = move.get_global_rect().get_center() + Vector2(70, 0)
+	move._input(finger)
+	assert(not player.is_dashing, "Reset must clear dash gesture history")
+	finger.pressed = false
+	move._input(finger)
+	await create_timer(0.35).timeout
+	finger.pressed = true
+	move._input(finger)
+	assert(not player.is_dashing, "Slow retouch only steers")
+	finger.pressed = false
+	finger.canceled = true
+	move._input(finger)
+	finger.pressed = true
+	finger.canceled = false
+	move._input(finger)
+	assert(not player.is_dashing, "Canceled touches cannot arm dash")
+	move.reset_stick()
+	print("PASS: single-threaded web config, mobile renderer, one-thumb move/aim, extra-finger rejection, retained aim, retouch-drag dash direction/charges, pause and reset")
 	lab.queue_free()
 	await create_timer(0.5).timeout
 	quit()

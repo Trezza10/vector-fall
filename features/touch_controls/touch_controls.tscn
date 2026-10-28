@@ -26,14 +26,14 @@ process_mode = 3
 layer = 9
 script = ExtResource("script")
 [node name="MoveStick" type="Control" parent="."]
-anchor_left = 0.0
-anchor_right = 0.0
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 48.0
-offset_top = -382.0
-offset_right = 272.0
-offset_bottom = -158.0
+offset_left = -140.0
+offset_top = -440.0
+offset_right = 140.0
+offset_bottom = -160.0
 mouse_filter = 2
 script = ExtResource("stick")
 [node name="Base" type="Panel" parent="MoveStick"]
@@ -42,62 +42,21 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Base")
 [node name="Thumb" type="Panel" parent="MoveStick"]
-offset_left = 84.0
-offset_top = 84.0
-offset_right = 140.0
-offset_bottom = 140.0
+offset_left = 112.0
+offset_top = 112.0
+offset_right = 168.0
+offset_bottom = 168.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Thumb")
 [node name="Label" type="Label" parent="MoveStick"]
-offset_top = 228.0
-offset_right = 224.0
-offset_bottom = 260.0
+offset_top = 290.0
+offset_right = 280.0
+offset_bottom = 354.0
 mouse_filter = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
-text = "MOVE"
-[node name="AimStick" type="Control" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -292.0
-offset_top = -382.0
-offset_right = -68.0
-offset_bottom = -158.0
-mouse_filter = 2
-script = ExtResource("stick")
-[node name="Base" type="Panel" parent="AimStick"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("Base")
-[node name="Thumb" type="Panel" parent="AimStick"]
-offset_left = 84.0
-offset_top = 84.0
-offset_right = 140.0
-offset_bottom = 140.0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("Thumb")
-[node name="Label" type="Label" parent="AimStick"]
-offset_top = 228.0
-offset_right = 224.0
-offset_bottom = 260.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-text = "AIM"
-[node name="Dash" type="TouchScreenButton" parent="."]
-texture_normal = ExtResource("button")
-shape = SubResource("ButtonShape")
-[node name="Label" type="Label" parent="Dash"]
-offset_right = 140.0
-offset_bottom = 90.0
-mouse_filter = 2
-theme_override_font_sizes/font_size = 22
-horizontal_alignment = 1
-vertical_alignment = 1
-text = "DASH"
+text = "MOVE + AIM
+LIFT + RETOUCH: DASH"
 [node name="Pause" type="TouchScreenButton" parent="."]
 texture_normal = ExtResource("button")
 shape = SubResource("ButtonShape")

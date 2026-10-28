@@ -48,7 +48,7 @@ func _check() -> void:
 	await process_frame
 	var bounds: Rect2 = Rect2(Vector2.ZERO, root.get_visible_rect().size)
 	assert(bounds.encloses(touch.get_node("MoveStick").get_global_rect()))
-	assert(bounds.encloses(touch.get_node("AimStick").get_global_rect()))
+	assert(not touch.has_node("AimStick"), "One steering pad only")
 	assert(lab.get_node("CanvasLayer/PlayerHealth").anchor_top == 0.0)
 	root.size = Vector2i(844, 390)
 	await process_frame
