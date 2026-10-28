@@ -13,13 +13,14 @@ func configure(player: PlaygroundPlayer, menu: PlaygroundPauseMenu) -> void:
 	_player = player
 	_menu = menu
 	_move.changed.connect(_on_move)
-	_move.dash_requested.connect(_on_dash)
+	$Dash.pressed.connect(_on_dash)
 	$Pause.pressed.connect(_on_pause)
 	$Reset.pressed.connect(_on_reset)
 	player.reset_performed.connect(_clear_sticks)
 	_enabled = force_show or OS.get_cmdline_user_args().has("--touch-controls") or DisplayServer.is_touchscreen_available() or OS.has_feature("mobile")
 	_player.touch_input_enabled = _enabled
 	visible = _enabled
+	_process(0.0)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and not _enabled and _player != null:
@@ -35,6 +36,8 @@ func _process(_delta: float) -> void:
 	visible = _enabled and not paused
 	_move.enabled = not paused
 	var viewport: Vector2 = get_viewport().get_visible_rect().size
+	$Dash.position = Vector2(32, viewport.y - 160)
+	$Dash/Label.text = "DASH\n%d/%d" % [_player.dash_charges, _player.max_dash_charges]
 	$Pause.position = Vector2(viewport.x - 162, 24)
 	$Reset.position = Vector2(viewport.x - 162, 130)
 

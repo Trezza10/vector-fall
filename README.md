@@ -6,7 +6,7 @@ dash upgrades, automatic weapons, stackable effects, eight enemy archetypes and 
 **Play:** https://Trezza10.github.io/vector-fall/
 
 Keyboard/mouse and controllers work on desktop. Phones get one combined MOVE + AIM
-pad with a lift/retouch dash gesture, plus PAUSE and RESET. Both orientations are supported. The Play screen also offers
+floating pad anywhere on screen, plus bottom-left DASH, PAUSE and RESET. Both orientations are supported. The Play screen also offers
 **Use touch controls** for previewing the phone controls on desktop. Browser audio starts
 with interaction; settings persist per browser/device when storage is allowed.
 
@@ -74,6 +74,6 @@ Web builds use Godot's sample audio path; desktop-only audio bus effects such as
 limiter do not apply there. No accounts, server multiplayer or native mobile package are
 required to play this build.
 
-Portrait phones use a taller camera layout, top health display and one bottom steering pad. Both orientations work without reloading. Violet Silencers warn with a radius ring before applying a 2.5-second firing lock; leave the ring before the pulse to evade it. Movement and dash remain available.
+Portrait phones use a taller camera layout, top health display and a fullscreen floating steering pad. Both orientations work without reloading. Violet Silencers warn with a radius ring before applying a 2.5-second firing lock; leave the ring before the pulse to evade it. Movement and dash remain available.
 
-Mobile: drag the bottom pad to aim and move together; release to brake and keep firing in the last direction. Lift and retouch within 0.28 seconds, then drag to dash in that direction. A held touch spends at most one dash; normal charge/cooldown rules apply.
+Mobile: touch anywhere outside the buttons to place a floating steering origin, then drag to move and aim together. Release to brake and keep firing in the last direction. Tap bottom-left DASH to dash; another finger can keep steering. Pause, reset and dash areas never start steering. Retouching only repositions the pad.

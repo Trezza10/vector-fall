@@ -26,37 +26,34 @@ process_mode = 3
 layer = 9
 script = ExtResource("script")
 [node name="MoveStick" type="Control" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -140.0
-offset_top = -440.0
-offset_right = 140.0
-offset_bottom = -160.0
-mouse_filter = 2
-script = ExtResource("stick")
-[node name="Base" type="Panel" parent="MoveStick"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+script = ExtResource("stick")
+excluded_buttons = Array[NodePath]([NodePath("../Dash"), NodePath("../Pause"), NodePath("../Reset")])
+[node name="Base" type="Panel" parent="MoveStick"]
+visible = false
+offset_right = 280.0
+offset_bottom = 280.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("Base")
 [node name="Thumb" type="Panel" parent="MoveStick"]
-offset_left = 112.0
-offset_top = 112.0
-offset_right = 168.0
-offset_bottom = 168.0
+visible = false
+offset_right = 56.0
+offset_bottom = 56.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Thumb")
-[node name="Label" type="Label" parent="MoveStick"]
-offset_top = 290.0
-offset_right = 280.0
-offset_bottom = 354.0
+[node name="Dash" type="TouchScreenButton" parent="."]
+texture_normal = ExtResource("button")
+shape = SubResource("ButtonShape")
+[node name="Label" type="Label" parent="Dash"]
+offset_right = 140.0
+offset_bottom = 90.0
 mouse_filter = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
-text = "MOVE + AIM
-LIFT + RETOUCH: DASH"
+vertical_alignment = 1
+text = "DASH"
 [node name="Pause" type="TouchScreenButton" parent="."]
 texture_normal = ExtResource("button")
 shape = SubResource("ButtonShape")
