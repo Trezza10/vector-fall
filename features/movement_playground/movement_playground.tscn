@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" path="res://features/touch_controls/touch_controls.tscn" id="touch"]
 
 [sub_resource type="RectangleShape2D" id="HorizontalWall"]
-size = Vector2(2400, 32)
+size = Vector2(4800, 32)
 
 [sub_resource type="StyleBoxFlat" id="DashTrack"]
 bg_color = Color(0.05, 0.13, 0.16, 1)
@@ -46,7 +46,7 @@ bg_color = Color(0.05, 0.13, 0.16, 1)
 bg_color = Color(0.4, 0.88, 0.81, 1)
 
 [sub_resource type="RectangleShape2D" id="VerticalWall"]
-size = Vector2(32, 1600)
+size = Vector2(32, 3200)
 
 [sub_resource type="RectangleShape2D" id="Block"]
 size = Vector2(160, 160)
@@ -65,51 +65,52 @@ content_margin_bottom = 12.0
 script = ExtResource("root")
 
 [node name="GridBackground" parent="." instance=ExtResource("grid")]
-size = Vector2(2400, 1600)
+z_index = -10
+size = Vector2(4800, 3200)
 palette = ExtResource("palette")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="North" type="CollisionShape2D" parent="Walls"]
-position = Vector2(1200, 0)
+position = Vector2(2400, 0)
 shape = SubResource("HorizontalWall")
 
 [node name="NorthVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(1200, 0)
-polygon = PackedVector2Array(-1200.0, -16.0, 1200.0, -16.0, 1200.0, 16.0, -1200.0, 16.0)
+position = Vector2(2400, 0)
+polygon = PackedVector2Array(-2400, -16, 2400, -16, 2400, 16, -2400, 16)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="South" type="CollisionShape2D" parent="Walls"]
-position = Vector2(1200, 1600)
+position = Vector2(2400, 3200)
 shape = SubResource("HorizontalWall")
 
 [node name="SouthVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(1200, 1600)
-polygon = PackedVector2Array(-1200.0, -16.0, 1200.0, -16.0, 1200.0, 16.0, -1200.0, 16.0)
+position = Vector2(2400, 3200)
+polygon = PackedVector2Array(-2400, -16, 2400, -16, 2400, 16, -2400, 16)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="West" type="CollisionShape2D" parent="Walls"]
-position = Vector2(0, 800)
+position = Vector2(0, 1600)
 shape = SubResource("VerticalWall")
 
 [node name="WestVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(0, 800)
-polygon = PackedVector2Array(-16.0, -800.0, 16.0, -800.0, 16.0, 800.0, -16.0, 800.0)
+position = Vector2(0, 1600)
+polygon = PackedVector2Array(-16, -1600, 16, -1600, 16, 1600, -16, 1600)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="East" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2400, 800)
+position = Vector2(4800, 1600)
 shape = SubResource("VerticalWall")
 
 [node name="EastVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(2400, 800)
-polygon = PackedVector2Array(-16.0, -800.0, 16.0, -800.0, 16.0, 800.0, -16.0, 800.0)
+position = Vector2(4800, 1600)
+polygon = PackedVector2Array(-16, -1600, 16, -1600, 16, 1600, -16, 1600)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="Block1" type="StaticBody2D" parent="Obstacles"]
-position = Vector2(740, 500)
+position = Vector2(1750, 2700)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block1"]
 shape = SubResource("Block")
@@ -124,7 +125,7 @@ width = 2.0
 default_color = Color(0.23, 0.42, 0.45, 1)
 
 [node name="Block2" type="StaticBody2D" parent="Obstacles"]
-position = Vector2(1660, 500)
+position = Vector2(2850, 2700)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block2"]
 shape = SubResource("Block")
@@ -139,7 +140,7 @@ width = 2.0
 default_color = Color(0.23, 0.42, 0.45, 1)
 
 [node name="Block3" type="StaticBody2D" parent="Obstacles"]
-position = Vector2(740, 1100)
+position = Vector2(1750, 3000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block3"]
 shape = SubResource("Block")
@@ -154,7 +155,7 @@ width = 2.0
 default_color = Color(0.23, 0.42, 0.45, 1)
 
 [node name="Block4" type="StaticBody2D" parent="Obstacles"]
-position = Vector2(1660, 1100)
+position = Vector2(2850, 3000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block4"]
 shape = SubResource("Block")
@@ -169,13 +170,13 @@ width = 2.0
 default_color = Color(0.23, 0.42, 0.45, 1)
 
 [node name="SpawnMarker" type="Line2D" parent="."]
-position = Vector2(1200, 800)
+position = Vector2(2400, 1600)
 points = PackedVector2Array(-60, -12, -60, -60, -12, -60)
 width = 2.0
 default_color = Color(0.2, 0.38, 0.4, 1)
 
 [node name="SpawnMarkerOpposite" type="Line2D" parent="."]
-position = Vector2(1200, 800)
+position = Vector2(2400, 1600)
 points = PackedVector2Array(60, 12, 60, 60, 12, 60)
 width = 2.0
 default_color = Color(0.2, 0.38, 0.4, 1)
@@ -183,33 +184,33 @@ default_color = Color(0.2, 0.38, 0.4, 1)
 [node name="TargetDummies" type="Node2D" parent="."]
 
 [node name="DummyLeft" parent="TargetDummies" instance=ExtResource("dummy")]
-position = Vector2(980, 600)
+position = Vector2(1800, 550)
 
 [node name="DummyCenter" parent="TargetDummies" instance=ExtResource("dummy")]
-position = Vector2(1200, 520)
+position = Vector2(2400, 550)
 
 [node name="DummyRight" parent="TargetDummies" instance=ExtResource("dummy")]
-position = Vector2(1420, 600)
+position = Vector2(3000, 550)
 
 
 [node name="LiveTargets" type="Node2D" parent="."]
 
 [node name="LiveLeft" parent="LiveTargets" instance=ExtResource("dummy")]
-position = Vector2(1000, 1000)
+position = Vector2(1800, 950)
 max_hp = 20
 respawn_on_death = true
 respawn_delay = 5.0
 display_label = "RESPAWNING TARGET"
 
 [node name="LiveCenter" parent="LiveTargets" instance=ExtResource("dummy")]
-position = Vector2(1200, 1110)
+position = Vector2(2400, 950)
 max_hp = 20
 respawn_on_death = true
 respawn_delay = 5.0
 display_label = "RESPAWNING TARGET"
 
 [node name="LiveRight" parent="LiveTargets" instance=ExtResource("dummy")]
-position = Vector2(1400, 1000)
+position = Vector2(3000, 950)
 max_hp = 20
 respawn_on_death = true
 respawn_delay = 5.0
@@ -219,70 +220,70 @@ display_label = "RESPAWNING TARGET"
 [node name="Pickups" type="Node2D" parent="."]
 
 [node name="MultishotA" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(950, 800)
+position = Vector2(3500, 850)
 modification = ExtResource("mod_multishot")
 
 [node name="MultishotB" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(900, 1040)
+position = Vector2(4050, 850)
 modification = ExtResource("mod_multishot")
 
 [node name="RapidFireA" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1450, 800)
+position = Vector2(4600, 850)
 modification = ExtResource("mod_rapid_fire")
 
 [node name="RapidFireB" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1500, 1040)
+position = Vector2(3500, 1150)
 modification = ExtResource("mod_rapid_fire")
 
 [node name="PiercingA" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(880, 690)
+position = Vector2(4050, 1150)
 modification = ExtResource("mod_piercing")
 
 [node name="PiercingB" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1520, 690)
+position = Vector2(4600, 1150)
 modification = ExtResource("mod_piercing")
 
 [node name="ImpactA" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1080, 660)
+position = Vector2(3500, 550)
 modification = ExtResource("mod_damage")
 
 [node name="ImpactB" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1320, 660)
+position = Vector2(4050, 550)
 modification = ExtResource("mod_damage")
 
 [node name="Velocity" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1200, 950)
+position = Vector2(4600, 550)
 modification = ExtResource("mod_velocity")
 
 
 [node name="Burn" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1800, 760)
+position = Vector2(3500, 2200)
 modification = ExtResource("mod_burn")
 
 [node name="Poison" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(2020, 760)
+position = Vector2(4050, 2200)
 modification = ExtResource("mod_poison")
 
 [node name="Ice" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(2240, 760)
+position = Vector2(4600, 2200)
 modification = ExtResource("mod_ice")
 
 [node name="Stun" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1800, 1000)
+position = Vector2(3500, 2600)
 modification = ExtResource("mod_stun")
 
 [node name="Knockback" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(2020, 1000)
+position = Vector2(4050, 2600)
 modification = ExtResource("mod_knockback")
 
 [node name="Mark" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(2240, 1000)
+position = Vector2(4600, 2600)
 modification = ExtResource("mod_mark")
 
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("player")]
-position = Vector2(1200, 800)
+position = Vector2(2400, 1600)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
@@ -291,8 +292,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 limit_left = 0
 limit_top = 0
-limit_right = 2400
-limit_bottom = 1600
+limit_right = 4800
+limit_bottom = 3200
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -308,8 +309,8 @@ mouse_filter = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.55, 0.9, 0.84, 1)
 theme_override_font_sizes/font_size = 19
-text = "VECTOR FALL / MOVEMENT LAB
-Accelerate. Turn. Release. Find the feel."
+text = "VECTOR FALL / TEST CAMPUS
+Follow the numbered floor signs."
 
 [node name="Help" type="PanelContainer" parent="CanvasLayer"]
 anchors_preset = 12
@@ -388,29 +389,21 @@ theme_override_font_sizes/font_size = 15
 theme_override_colors/font_color = Color(0.7, 0.8, 0.82, 1)
 text = "Walk over a glowing pickup."
 
-[node name="EffectsSign" type="Label" parent="."]
-offset_left = 1780.0
-offset_top = 630.0
-offset_right = 2370.0
-offset_bottom = 690.0
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(0.55, 0.82, 0.84, 1)
-text = "ON-HIT EFFECTS / STACK + COMBINE"
 
 [node name="CritChanceA" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1080, 850)
+position = Vector2(3500, 1450)
 modification = ExtResource("mod_crit")
 
 [node name="CritChanceB" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1320, 850)
+position = Vector2(4050, 1450)
 modification = ExtResource("mod_crit")
 
 [node name="DashReserve" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1080, 740)
+position = Vector2(2100, 2350)
 modification = ExtResource("mod_dash_charge")
 
 [node name="QuickDash" parent="Pickups" instance=ExtResource("pickup")]
-position = Vector2(1320, 740)
+position = Vector2(2600, 2350)
 modification = ExtResource("mod_dash_cooldown")
 
 [node name="EnemyProjectiles" type="Node2D" parent="."]
@@ -448,9 +441,9 @@ text = "R restores health and resets the encounter"
 
 [node name="PlayerDamageFeedback" parent="." instance=ExtResource("damage_feedback")]
 [node name="RepairEntrance" parent="Pickups" instance=ExtResource("healing_pickup")]
-position = Vector2(720, 800)
+position = Vector2(2400, 1970)
 [node name="RepairField" parent="Pickups" instance=ExtResource("healing_pickup")]
-position = Vector2(400, 1180)
+position = Vector2(1450, 1950)
 
 [node name="TouchControls" parent="." instance=ExtResource("touch")]
 
@@ -466,4 +459,207 @@ horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.85, 0.5, 1, 1)
 theme_override_font_sizes/font_size = 28
 text = "SILENCED / 2.5s"
+mouse_filter = 2
+
+[node name="FloorZones" type="Node2D" parent="."]
+z_index = -2
+
+[node name="TargetRange" type="Node2D" parent="FloorZones"]
+position = Vector2(1550, 100)
+
+[node name="Floor" type="Polygon2D" parent="FloorZones/TargetRange"]
+polygon = PackedVector2Array(0, 0, 1650, 0, 1650, 1050, 0, 1050)
+color = Color(0.5, 0.85, 0.95, 0.025)
+
+[node name="Border" type="Line2D" parent="FloorZones/TargetRange"]
+points = PackedVector2Array(0, 0, 1650, 0, 1650, 1050, 0, 1050, 0, 0)
+width = 2.0
+default_color = Color(0.5, 0.85, 0.95, 0.35)
+
+[node name="Title" type="Label" parent="FloorZones/TargetRange"]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1610.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.5, 0.85, 0.95, 1)
+text = "01 / TARGET RANGE"
+mouse_filter = 2
+
+[node name="Purpose" type="Label" parent="FloorZones/TargetRange"]
+offset_left = 40.0
+offset_top = 92.0
+offset_right = 1610.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.5, 0.85, 0.95, 1)
+text = "TOP: 1M HP training  |  BOTTOM: 20 HP / 5s respawn"
+mouse_filter = 2
+
+[node name="WeaponUpgrades" type="Node2D" parent="FloorZones"]
+position = Vector2(3250, 100)
+
+[node name="Floor" type="Polygon2D" parent="FloorZones/WeaponUpgrades"]
+polygon = PackedVector2Array(0, 0, 1450, 0, 1450, 1550, 0, 1550)
+color = Color(0.95, 0.72, 0.3, 0.025)
+
+[node name="Border" type="Line2D" parent="FloorZones/WeaponUpgrades"]
+points = PackedVector2Array(0, 0, 1450, 0, 1450, 1550, 0, 1550, 0, 0)
+width = 2.0
+default_color = Color(0.95, 0.72, 0.3, 0.35)
+
+[node name="Title" type="Label" parent="FloorZones/WeaponUpgrades"]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1410.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.95, 0.72, 0.3, 1)
+text = "02 / WEAPON UPGRADES"
+mouse_filter = 2
+
+[node name="Purpose" type="Label" parent="FloorZones/WeaponUpgrades"]
+offset_left = 40.0
+offset_top = 92.0
+offset_right = 1410.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.95, 0.72, 0.3, 1)
+text = "Walk over a core to collect. Repeated pickups stack for the run."
+mouse_filter = 2
+
+[node name="Movement" type="Node2D" parent="FloorZones"]
+position = Vector2(1550, 2100)
+
+[node name="Floor" type="Polygon2D" parent="FloorZones/Movement"]
+polygon = PackedVector2Array(0, 0, 1500, 0, 1500, 1000, 0, 1000)
+color = Color(0.4, 0.9, 0.72, 0.025)
+
+[node name="Border" type="Line2D" parent="FloorZones/Movement"]
+points = PackedVector2Array(0, 0, 1500, 0, 1500, 1000, 0, 1000, 0, 0)
+width = 2.0
+default_color = Color(0.4, 0.9, 0.72, 0.35)
+
+[node name="Title" type="Label" parent="FloorZones/Movement"]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1460.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.4, 0.9, 0.72, 1)
+text = "03 / MOVEMENT + DASH"
+mouse_filter = 2
+
+[node name="Purpose" type="Label" parent="FloorZones/Movement"]
+offset_left = 40.0
+offset_top = 92.0
+offset_right = 1460.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.4, 0.9, 0.72, 1)
+text = "Dash upgrades up front. Open space and collision blocks below."
+mouse_filter = 2
+
+[node name="StatusEffects" type="Node2D" parent="FloorZones"]
+position = Vector2(3250, 1850)
+
+[node name="Floor" type="Polygon2D" parent="FloorZones/StatusEffects"]
+polygon = PackedVector2Array(0, 0, 1450, 0, 1450, 1150, 0, 1150)
+color = Color(0.8, 0.55, 1.0, 0.025)
+
+[node name="Border" type="Line2D" parent="FloorZones/StatusEffects"]
+points = PackedVector2Array(0, 0, 1450, 0, 1450, 1150, 0, 1150, 0, 0)
+width = 2.0
+default_color = Color(0.8, 0.55, 1.0, 0.35)
+
+[node name="Title" type="Label" parent="FloorZones/StatusEffects"]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1410.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.8, 0.55, 1.0, 1)
+text = "04 / STATUS EFFECTS"
+mouse_filter = 2
+
+[node name="Purpose" type="Label" parent="FloorZones/StatusEffects"]
+offset_left = 40.0
+offset_top = 92.0
+offset_right = 1410.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.8, 0.55, 1.0, 1)
+text = "Collect, then test on the range or live enemies."
+mouse_filter = 2
+
+[node name="Wayfinding" type="Node2D" parent="."]
+
+[node name="Start" type="Label" parent="Wayfinding"]
+offset_left = 2190.0
+offset_top = 1480.0
+offset_right = 2690.0
+offset_bottom = 1580.0
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.55, 0.9, 0.84, 1)
+text = "VECTOR FALL / TEST HUB"
+mouse_filter = 2
+
+[node name="North" type="Label" parent="Wayfinding"]
+offset_left = 2250.0
+offset_top = 1350.0
+offset_right = 2600.0
+offset_bottom = 1410.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.5, 0.85, 0.95, 1)
+text = "^ 01 TARGETS"
+mouse_filter = 2
+
+[node name="West" type="Label" parent="Wayfinding"]
+offset_left = 2120.0
+offset_top = 1590.0
+offset_right = 2380.0
+offset_bottom = 1650.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(1.0, 0.55, 0.35, 1)
+text = "< 05 ENEMIES"
+mouse_filter = 2
+
+[node name="East" type="Label" parent="Wayfinding"]
+offset_left = 2450.0
+offset_top = 1590.0
+offset_right = 2750.0
+offset_bottom = 1650.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.95, 0.72, 0.3, 1)
+text = "02 UPGRADES >"
+mouse_filter = 2
+
+[node name="South" type="Label" parent="Wayfinding"]
+offset_left = 2230.0
+offset_top = 1830.0
+offset_right = 2630.0
+offset_bottom = 1890.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.4, 0.9, 0.72, 1)
+text = "03 MOVEMENT v"
+mouse_filter = 2
+
+[node name="Southeast" type="Label" parent="Wayfinding"]
+offset_left = 2470.0
+offset_top = 1730.0
+offset_right = 2770.0
+offset_bottom = 1790.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.8, 0.55, 1.0, 1)
+text = "04 EFFECTS >"
+mouse_filter = 2
+
+[node name="Repair" type="Label" parent="Wayfinding"]
+offset_left = 1290.0
+offset_top = 1810.0
+offset_right = 1710.0
+offset_bottom = 1910.0
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.4, 0.9, 0.72, 1)
+text = "REPAIR / FIELD EXIT"
 mouse_filter = 2

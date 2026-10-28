@@ -79,3 +79,15 @@ Portrait phones use a taller camera layout, top health display and a fullscreen 
 Mobile: touch anywhere outside the buttons to place a floating steering origin, then drag to move and aim together. Release to brake and keep firing in the last direction. Tap the bottom-left chevron icon to dash; another finger can keep steering. Pause and dash areas never start steering. Retouching only repositions the pad.
 
 Mobile HUD stays minimal: health, pause and the dash icon. The icon dims when no dash charges remain. Fullscreen is under Pause > Settings > Graphics (browser support varies); desktop F11 still works. Restart a browser run from the pause menu with Reload game.
+
+## Playground map
+
+Start at the central test hub and follow the floor signs:
+
+- **01 / North — Target Range:** three 1M-HP training targets, then three 20-HP respawning targets.
+- **02 / Northeast — Weapon Upgrades:** spaced rows of damage, bullets, fire rate, pierce and crit pickups. Duplicates let you test stacking.
+- **03 / South — Movement + Dash:** dash upgrades, open space and collision blocks.
+- **04 / Southeast — Status Effects:** burn, poison, ice, stun, knockback and mark.
+- **05 / West — Live Enemies:** eight named stations with permanent behavior descriptions. Approach to engage.
+
+Green repair pickups sit at the hub and the hostile-field exit. Floor zones, guides, pickups, targets, obstacles and enemy stations are all authored in the scene editor. The campus is 4800 x 3200 world units; camera/world bounds match its walls.

@@ -30,7 +30,7 @@ func _check() -> void:
 	var origin: Vector2 = tank.global_position
 	tank._physics_process(0.1)
 	assert(tank.global_position == origin, "Distant enemies must stay idle at spawn")
-	player.global_position = Vector2(600, 300)
+	player.global_position = tank.global_position + Vector2(350, 0)
 	var runner_origin: Vector2 = runner.global_position
 	for index: int in range(30):
 		tank._physics_process(1.0 / 60.0)
@@ -49,7 +49,7 @@ func _check() -> void:
 	var next: PackedFloat32Array = spiral.fire_pattern()
 	assert(first.size() == 1 and is_equal_approx(next[0] - first[0], deg_to_rad(19.0)))
 	await _clear_shots(lab)
-	player.global_position = Vector2(600, 1250)
+	player.global_position = charger.global_position + Vector2(150, 0)
 	charger._attack_remaining = 0.0
 	charger._physics_process(0.01)
 	assert(charger._phase == PlaygroundEnemy.Phase.WINDUP and charger.get_node("AimLine").visible)
@@ -121,7 +121,7 @@ func _check() -> void:
 	assert(player.hits_taken == 1 and not is_instance_valid(shot))
 	assert(not player.receive_enemy_hit(1), "Grace window prevents contact-hit spam")
 	var wall_shot: EnemyProjectile = load("res://features/enemies/enemy_projectile.tscn").instantiate()
-	wall_shot.position = Vector2(2350, 900)
+	wall_shot.position = Vector2(4750, 900)
 	wall_shot.heading = Vector2.RIGHT
 	wall_shot.speed = 900.0
 	lab.get_node("EnemyProjectiles").add_child(wall_shot)
