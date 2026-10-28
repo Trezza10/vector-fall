@@ -152,7 +152,7 @@ offset_right = 510.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 23
 theme_override_colors/font_color = Color(1, 0.65, 0.45, 1)
-text = "RADIAL\nALTERNATING PROJECTILE RINGS"
+text = "RING SENTINEL\nALTERNATING PROJECTILE RINGS"
 mouse_filter = 2
 
 [node name="SpiralBay" type="Node2D" parent="."]
@@ -171,7 +171,7 @@ offset_right = 510.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 23
 theme_override_colors/font_color = Color(1, 0.65, 0.45, 1)
-text = "SPIRAL\nSPIRAL PROJECTILES"
+text = "SPIRAL WEAVER\nSPIRAL PROJECTILES"
 mouse_filter = 2
 
 [node name="ChargerBay" type="Node2D" parent="."]
@@ -190,7 +190,7 @@ offset_right = 510.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 23
 theme_override_colors/font_color = Color(1, 0.65, 0.45, 1)
-text = "CHARGER\nLOCKED WINDUP / STRAIGHT CHARGE"
+text = "LANCER\nLOCKED WINDUP / STRAIGHT CHARGE"
 mouse_filter = 2
 
 [node name="SplitterBay" type="Node2D" parent="."]
@@ -209,7 +209,7 @@ offset_right = 510.0
 offset_bottom = 120.0
 theme_override_font_sizes/font_size = 23
 theme_override_colors/font_color = Color(1, 0.65, 0.45, 1)
-text = "SPLITTER\nSPLITS INTO THREE ON DEATH"
+text = "FRACTURE\nSPLITS INTO THREE ON DEATH"
 mouse_filter = 2
 
 [node name="SilencerBay" type="Node2D" parent="."]
