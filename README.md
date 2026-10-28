@@ -1,7 +1,7 @@
 # Vector Fall
 
 A Godot 4.7 technical-interface action playground with smooth movement, charge-based
-dash upgrades, automatic weapons, stackable effects, eight enemy archetypes and player health.
+dash upgrades, automatic weapons, stackable effects, fourteen enemy archetypes and player health.
 
 **Play:** https://Trezza10.github.io/vector-fall/
 
@@ -90,4 +90,8 @@ Start at the central test hub and follow the floor signs:
 - **04 / Southeast — Status Effects:** burn, poison, ice, stun, knockback and mark.
 - **05 / West — Live Enemies:** eight named stations with permanent behavior descriptions. Approach to engage.
 
-Green repair pickups sit at the hub and the hostile-field exit. Floor zones, guides, pickups, targets, obstacles and enemy stations are all authored in the scene editor. The campus is 4800 x 3200 world units; camera/world bounds match its walls.
+Green repair pickups sit at the hub and the hostile-field exit. Floor zones, guides, pickups, targets, obstacles and enemy stations are all authored in the scene editor. The campus is 7200 x 4600 world units; camera/world bounds match its walls.
+
+**06 / Far east — Advanced Hazards:** six spacious bays beyond the original upgrade/effects areas. Mire Lobber throws a marked arc volley that lands in poison pools; Disruptor shoots stun bolts; Repulsor pushes with cyan rounds; Cinder Runner dashes through a burning trail; Prism Lancer locks a warning line before firing a laser. Linked Colossus shoots large, slow, long-range rounds and is immune until its remote 40-HP Life Link in the south is destroyed. The magenta beam points to the link. Resetting the encounter or the Colossus respawning restores the link.
+
+Player poison/burn, stun and knockback reuse the same damage feedback and grace rules as other hits. Status tint appears on the player; no extra mobile HUD is added. Ground hazards and statuses pause with gameplay and clear on a run reset. World health bars are positioned from their actual scaled width and enemy radius so future archetypes remain centered.

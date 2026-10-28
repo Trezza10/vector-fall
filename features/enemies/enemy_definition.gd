@@ -1,7 +1,7 @@
 class_name EnemyDefinition
 extends Resource
 
-enum Kind { TANK, RUNNER, DASHER, RADIAL, SPIRAL, CHARGER, SPLITTER, MINI, SILENCER }
+enum Kind { TANK, RUNNER, DASHER, RADIAL, SPIRAL, CHARGER, SPLITTER, MINI, SILENCER, POISON_LOBBER, STUNNER, REPULSOR, FIRE_DASH, LASER, LINKED_ARTILLERY }
 
 @export var display_name: String = "Enemy"
 @export var kind: Kind = Kind.TANK
@@ -21,10 +21,21 @@ enum Kind { TANK, RUNNER, DASHER, RADIAL, SPIRAL, CHARGER, SPLITTER, MINI, SILEN
 @export_group("Projectiles")
 @export_range(1, 32, 1) var bullet_count: int = 12
 @export_range(50.0, 800.0, 10.0) var bullet_speed: float = 190.0
-@export_range(0.5, 8.0, 0.1) var bullet_lifetime: float = 4.0
+@export_range(0.5, 20.0, 0.1) var bullet_lifetime: float = 4.0
 @export_range(1, 100, 1) var bullet_damage: int = 1
 @export_range(1.0, 90.0, 1.0) var spiral_step_degrees: float = 19.0
 
 @export_group("Silence pulse")
 @export_range(60.0, 600.0, 10.0) var silence_radius: float = 240.0
 @export_range(0.2, 6.0, 0.1) var silence_duration: float = 2.5
+
+@export_group("Advanced attacks")
+@export_range(100.0, 1600.0, 10.0) var attack_range: float = 850.0
+@export_range(0.1, 5.0, 0.1) var player_effect_duration: float = 0.8
+@export_range(100.0, 1200.0, 10.0) var knockback_strength: float = 800.0
+@export_range(0.2, 3.0, 0.05) var laser_duration: float = 0.7
+
+@export_group("Ground hazards")
+@export_range(20.0, 150.0, 5.0) var hazard_radius: float = 70.0
+@export_range(0.5, 10.0, 0.1) var hazard_lifetime: float = 4.0
+@export_range(20.0, 100.0, 5.0) var trail_spacing: float = 45.0

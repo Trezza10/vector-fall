@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ShapeColors" load_steps=2 format=3]
+[ext_resource type="Script" path="res://visuals/shapes/shape_colors.gd" id="script"]
+[resource]
+script = ExtResource("script")
+fill = Color(0.020000000000000004, 0.08000000000000002, 0.1, 1)
+outline = Color(0.2, 0.8, 1, 1)
+detail = Color(0.2, 0.8, 1, 0.5)
+highlight = Color(1, 1, 1, 1)

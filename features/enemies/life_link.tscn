@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://features/target_dummy/target_dummy.tscn" id="base"]
+[ext_resource type="Resource" path="res://data/shapes/life_link.tres" id="shape"]
+[ext_resource type="Resource" path="res://data/palettes/enemy_linked_artillery.tres" id="colors"]
+[node name="LifeLink" instance=ExtResource("base")]
+max_hp = 40
+die_at_zero = true
+display_label = "LIFE LINK / DESTROY TO BREAK SHIELD"
+[node name="ShapeVisual" parent="." index="1"]
+definition = ExtResource("shape")
+colors = ExtResource("colors")
+
+[node name="Label" parent="." index="2"]
+offset_left = -260.0
+offset_right = 260.0
+theme_override_font_sizes/font_size = 18

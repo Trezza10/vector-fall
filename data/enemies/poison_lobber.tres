@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/enemies/enemy_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+display_name = "Mire Lobber"
+kind = 9
+health = 85
+move_speed = 25.0
+attack_interval = 4.5
+activation_radius = 850.0
+attack_range = 800.0

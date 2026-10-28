@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://features/enemies/enemy_base.tscn" id="base"]
+[ext_resource type="Script" path="res://features/enemies/advanced_enemy.gd" id="script"]
+[node name="AdvancedEnemy" instance=ExtResource("base")]
+script = ExtResource("script")
+[node name="Laser" type="Line2D" parent="."]
+visible = false
+width = 2.0
+default_color = Color(1, 0.3, 0.3, 0.5)
+[node name="Core" type="Line2D" parent="Laser"]
+width = 4.0
+default_color = Color(1, 0.95, 0.9, 1)
+[node name="ShieldRing" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(55.000, 0.000, 53.943, 10.730, 50.813, 21.048, 45.731, 30.556, 38.891, 38.891, 30.556, 45.731, 21.048, 50.813, 10.730, 53.943, 0.000, 55.000, -10.730, 53.943, -21.048, 50.813, -30.556, 45.731, -38.891, 38.891, -45.731, 30.556, -50.813, 21.048, -53.943, 10.730, -55.000, 0.000, -53.943, -10.730, -50.813, -21.048, -45.731, -30.556, -38.891, -38.891, -30.556, -45.731, -21.048, -50.813, -10.730, -53.943, -0.000, -55.000, 10.730, -53.943, 21.048, -50.813, 30.556, -45.731, 38.891, -38.891, 45.731, -30.556, 50.813, -21.048, 53.943, -10.730, 55.000, -0.000)
+width = 3.0
+default_color = Color(1, 0.3, 0.8, 0.8)
+[node name="LifeLinkBeam" type="Line2D" parent="."]
+visible = false
+width = 2.0
+default_color = Color(1, 0.3, 0.8, 0.4)
+z_index = -1

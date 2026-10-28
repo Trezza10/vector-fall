@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3]
+[gd_scene load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://features/movement_playground/movement_playground.gd" id="root"]
 [ext_resource type="PackedScene" path="res://features/player/player.tscn" id="player"]
@@ -36,8 +36,9 @@
 
 [ext_resource type="PackedScene" path="res://features/touch_controls/touch_controls.tscn" id="touch"]
 
+[ext_resource type="PackedScene" path="res://features/enemies/advanced_field.tscn" id="advanced_field"]
 [sub_resource type="RectangleShape2D" id="HorizontalWall"]
-size = Vector2(4800, 32)
+size = Vector2(7200, 32)
 
 [sub_resource type="StyleBoxFlat" id="DashTrack"]
 bg_color = Color(0.05, 0.13, 0.16, 1)
@@ -46,7 +47,7 @@ bg_color = Color(0.05, 0.13, 0.16, 1)
 bg_color = Color(0.4, 0.88, 0.81, 1)
 
 [sub_resource type="RectangleShape2D" id="VerticalWall"]
-size = Vector2(32, 3200)
+size = Vector2(32, 4600)
 
 [sub_resource type="RectangleShape2D" id="Block"]
 size = Vector2(160, 160)
@@ -66,45 +67,45 @@ script = ExtResource("root")
 
 [node name="GridBackground" parent="." instance=ExtResource("grid")]
 z_index = -10
-size = Vector2(4800, 3200)
+size = Vector2(7200, 4600)
 palette = ExtResource("palette")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="North" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2400, 0)
+position = Vector2(3600, 0)
 shape = SubResource("HorizontalWall")
 
 [node name="NorthVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(2400, 0)
-polygon = PackedVector2Array(-2400, -16, 2400, -16, 2400, 16, -2400, 16)
+position = Vector2(3600, 0)
+polygon = PackedVector2Array(-3600, -16, 3600, -16, 3600, 16, -3600, 16)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="South" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2400, 3200)
+position = Vector2(3600, 4600)
 shape = SubResource("HorizontalWall")
 
 [node name="SouthVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(2400, 3200)
-polygon = PackedVector2Array(-2400, -16, 2400, -16, 2400, 16, -2400, 16)
+position = Vector2(3600, 4600)
+polygon = PackedVector2Array(-3600, -16, 3600, -16, 3600, 16, -3600, 16)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="West" type="CollisionShape2D" parent="Walls"]
-position = Vector2(0, 1600)
+position = Vector2(0, 2300)
 shape = SubResource("VerticalWall")
 
 [node name="WestVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(0, 1600)
-polygon = PackedVector2Array(-16, -1600, 16, -1600, 16, 1600, -16, 1600)
+position = Vector2(0, 2300)
+polygon = PackedVector2Array(-16, -2300, 16, -2300, 16, 2300, -16, 2300)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="East" type="CollisionShape2D" parent="Walls"]
-position = Vector2(4800, 1600)
+position = Vector2(7200, 2300)
 shape = SubResource("VerticalWall")
 
 [node name="EastVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(4800, 1600)
-polygon = PackedVector2Array(-16, -1600, 16, -1600, 16, 1600, -16, 1600)
+position = Vector2(7200, 2300)
+polygon = PackedVector2Array(-16, -2300, 16, -2300, 16, 2300, -16, 2300)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="Obstacles" type="Node2D" parent="."]
@@ -292,8 +293,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 limit_left = 0
 limit_top = 0
-limit_right = 4800
-limit_bottom = 3200
+limit_right = 7200
+limit_bottom = 4600
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -662,4 +663,36 @@ offset_bottom = 1910.0
 theme_override_font_sizes/font_size = 24
 theme_override_colors/font_color = Color(0.4, 0.9, 0.72, 1)
 text = "REPAIR / FIELD EXIT"
+mouse_filter = 2
+
+[node name="AdvancedField" parent="." instance=ExtResource("advanced_field")]
+[node name="AdvancedGuide" type="Label" parent="Wayfinding"]
+offset_left = 4280.0
+offset_top = 1700.0
+offset_right = 5600.0
+offset_bottom = 1820.0
+theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0.85, 0.55, 1, 1)
+text = "06 ADVANCED ENEMIES >
+Poison / stun / knockback / fire / laser / life link"
+mouse_filter = 2
+[node name="AdvancedTitle" type="Label" parent="Wayfinding"]
+offset_left = 5100.0
+offset_top = 300.0
+offset_right = 7100.0
+offset_bottom = 450.0
+theme_override_font_sizes/font_size = 38
+theme_override_colors/font_color = Color(0.85, 0.55, 1, 1)
+text = "06 / ADVANCED HAZARDS
+Six spaced test bays. Remote life link in the south."
+mouse_filter = 2
+
+[node name="AdvancedHubGuide" type="Label" parent="Wayfinding"]
+offset_left = 2470.0
+offset_top = 2070.0
+offset_right = 3000.0
+offset_bottom = 2130.0
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.85, 0.55, 1, 1)
+text = "06 FAR EAST / NEW ENEMIES >"
 mouse_filter = 2

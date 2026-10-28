@@ -84,6 +84,8 @@ func _physics_process(delta: float) -> void:
 		return
 	_attack_remaining -= delta
 	match definition.kind:
+		EnemyDefinition.Kind.POISON_LOBBER, EnemyDefinition.Kind.STUNNER, EnemyDefinition.Kind.REPULSOR, EnemyDefinition.Kind.FIRE_DASH, EnemyDefinition.Kind.LASER, EnemyDefinition.Kind.LINKED_ARTILLERY:
+			_update_advanced(delta)
 		EnemyDefinition.Kind.SILENCER:
 			_update_silencer(delta)
 		EnemyDefinition.Kind.RADIAL, EnemyDefinition.Kind.SPIRAL:
@@ -269,3 +271,6 @@ func _update_silencer(delta: float) -> void:
 			_warning.scale = Vector2.ONE * definition.silence_radius / 43.0
 			_warning.show()
 			$WindupSound.trigger()
+
+func _update_advanced(_delta: float) -> void:
+	pass

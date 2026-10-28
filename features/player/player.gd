@@ -32,6 +32,7 @@ signal dash_finished
 
 @onready var _visual: ShapeVisual = $ShapeVisual
 @onready var _dash_feedback: DashFeedback = $DashFeedback
+@onready var incoming_status: PlayerStatus = $PlayerStatus
 @onready var shooter: AutoShooter = $AutoShooter
 
 var _current_hp: int = 100
@@ -95,8 +96,9 @@ func _input(event: InputEvent) -> void:
 			_using_controller = false
 
 func _physics_process(delta: float) -> void:
+	shooter.firing_blocked = not is_alive or incoming_status.is_stunned
 	_hurt_remaining = maxf(0.0, _hurt_remaining - delta)
-	_visual.modulate = Color.WHITE.lerp(Color(1.0, 0.25, 0.2), minf(_hurt_remaining * 3.0, 0.65))
+	_visual.modulate = incoming_status.tint.lerp(Color(1.0, 0.25, 0.2), minf(_hurt_remaining * 3.0, 0.65))
 	if not is_alive:
 		velocity = Vector2.ZERO
 		_visual.modulate = Color(0.4, 0.22, 0.2)
@@ -104,6 +106,12 @@ func _physics_process(delta: float) -> void:
 	(_visual.material as ShaderMaterial).set_shader_parameter("flash", clampf(_hurt_remaining / hit_grace_period, 0.0, 1.0) * 0.85)
 	shooter.aim_direction = shooting_direction()
 	_update_dash_recharge(delta)
+	if incoming_status.is_stunned or incoming_status.push_velocity.length_squared() > 1.0:
+		if is_dashing: _finish_dash()
+		velocity = incoming_status.push_velocity
+		if move_and_slide(): incoming_status.push_velocity = Vector2.ZERO
+		incoming_status.push_velocity *= exp(-10.0 * delta)
+		return
 	var direction: Vector2 = _movement_input()
 	if not direction.is_zero_approx(): _last_direction = direction.normalized()
 	if is_dashing:
@@ -130,6 +138,7 @@ func reset_to_spawn() -> void:
 	_current_hp = maxi(1, max_hp)
 	shooter.firing_blocked = false
 	shooter.silence_remaining = 0.0
+	incoming_status.clear()
 	health_changed.emit(_current_hp, max_hp)
 	hits_taken = 0
 	_hurt_remaining = 0.0
@@ -153,7 +162,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func try_dash() -> bool:
-	if get_tree().paused or not is_alive or is_dashing or _dash_charges <= 0: return false
+	if get_tree().paused or not is_alive or incoming_status.is_stunned or is_dashing or _dash_charges <= 0: return false
 	var direction: Vector2 = _movement_input()
 	if direction.is_zero_approx(): direction = _facing_input(Vector2.ZERO)
 	if direction.is_zero_approx(): direction = _last_direction
@@ -285,3 +294,8 @@ func heal(amount: int) -> int:
 	_current_hp += restored
 	health_changed.emit(_current_hp, max_hp)
 	return restored
+
+func receive_enemy_attack(amount: int, source_position: Vector2, effect: PlayerStatus.Kind = PlayerStatus.Kind.NONE, duration: float = 0.0, strength: float = 0.0) -> bool:
+	if not receive_enemy_hit(amount, source_position): return false
+	if is_alive: incoming_status.apply(effect, duration, strength, global_position - source_position)
+	return true

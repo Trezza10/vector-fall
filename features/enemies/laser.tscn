@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="PackedScene" path="res://features/enemies/advanced_base.tscn" id="base"]
+[ext_resource type="Resource" path="res://data/enemies/laser.tres" id="definition"]
+[ext_resource type="Resource" path="res://data/shapes/enemy_laser.tres" id="shape"]
+[ext_resource type="Resource" path="res://data/palettes/enemy_laser.tres" id="colors"]
+[sub_resource type="CircleShape2D" id="Body"]
+radius = 28.0
+[node name="Laser" instance=ExtResource("base")]
+definition = ExtResource("definition")
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("Body")
+[node name="ShapeVisual" parent="." index="1"]
+definition = ExtResource("shape")
+colors = ExtResource("colors")

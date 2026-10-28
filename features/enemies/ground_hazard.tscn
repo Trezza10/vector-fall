@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/enemies/ground_hazard.gd" id="script"]
+[sub_resource type="CircleShape2D" id="shape"]
+resource_local_to_scene = true
+radius = 70.0
+[sub_resource type="Gradient" id="fade"]
+colors = PackedColorArray(1, 1, 1, 0.7, 1, 1, 1, 0)
+[node name="GroundHazard" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("script")
+z_index = -1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+[node name="Surface" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(60.000, 0.000, 58.847, 11.705, 55.433, 22.961, 49.888, 33.334, 42.426, 42.426, 33.334, 49.888, 22.961, 55.433, 11.705, 58.847, 0.000, 60.000, -11.705, 58.847, -22.961, 55.433, -33.334, 49.888, -42.426, 42.426, -49.888, 33.334, -55.433, 22.961, -58.847, 11.705, -60.000, 0.000, -58.847, -11.705, -55.433, -22.961, -49.888, -33.334, -42.426, -42.426, -33.334, -49.888, -22.961, -55.433, -11.705, -58.847, -0.000, -60.000, 11.705, -58.847, 22.961, -55.433, 33.334, -49.888, 42.426, -42.426, 49.888, -33.334, 55.433, -22.961, 58.847, -11.705, 60.000, -0.000)
+color = Color(1, 1, 1, 0.22)
+[node name="Rim" type="Line2D" parent="."]
+points = PackedVector2Array(60.000, 0.000, 58.847, 11.705, 55.433, 22.961, 49.888, 33.334, 42.426, 42.426, 33.334, 49.888, 22.961, 55.433, 11.705, 58.847, 0.000, 60.000, -11.705, 58.847, -22.961, 55.433, -33.334, 49.888, -42.426, 42.426, -49.888, 33.334, -55.433, 22.961, -58.847, 11.705, -60.000, 0.000, -58.847, -11.705, -55.433, -22.961, -49.888, -33.334, -42.426, -42.426, -33.334, -49.888, -22.961, -55.433, -11.705, -58.847, -0.000, -60.000, 11.705, -58.847, 22.961, -55.433, 33.334, -49.888, 42.426, -42.426, 49.888, -33.334, 55.433, -22.961, 58.847, -11.705, 60.000, -0.000)
+width = 2.0
+default_color = Color(1, 1, 1, 0.65)
+
+[node name="Vapor" type="CPUParticles2D" parent="."]
+amount = 18
+lifetime = 0.7
+emission_shape = 1
+emission_sphere_radius = 42.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 12.0
+initial_velocity_max = 30.0
+scale_amount_min = 1.5
+scale_amount_max = 3.5
+color_ramp = SubResource("fade")

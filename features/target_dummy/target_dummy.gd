@@ -32,6 +32,8 @@ var current_hp: int:
 	get: return _current_hp
 
 func _ready() -> void:
+	# World bars stay centered even when an archetype scales the shared Control.
+	_bar.position = Vector2(-_bar.size.x * _bar.scale.x * 0.5, -_visual.definition.radius - 36.0)
 	_spawn_position = global_position
 	statuses.damage_tick.connect(_on_status_damage)
 	statuses.knockback_requested.connect(_on_knockback_requested)

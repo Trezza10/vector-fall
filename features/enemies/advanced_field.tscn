@@ -1,0 +1,151 @@
+[gd_scene load_steps=9 format=3]
+[ext_resource type="Script" path="res://features/enemies/enemy_field.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/enemies/poison_lobber.tscn" id="poison_lobber"]
+[ext_resource type="PackedScene" path="res://features/enemies/stunner.tscn" id="stunner"]
+[ext_resource type="PackedScene" path="res://features/enemies/repulsor.tscn" id="repulsor"]
+[ext_resource type="PackedScene" path="res://features/enemies/fire_dash.tscn" id="fire_dash"]
+[ext_resource type="PackedScene" path="res://features/enemies/laser.tscn" id="laser"]
+[ext_resource type="PackedScene" path="res://features/enemies/linked_artillery.tscn" id="linked_artillery"]
+[ext_resource type="PackedScene" path="res://features/enemies/life_link.tscn" id="link"]
+[node name="AdvancedField" type="Node2D"]
+script = ExtResource("script")
+[node name="LifeLink" parent="." instance=ExtResource("link")]
+position = Vector2(5500, 4200)
+
+[node name="PoisonLobber" parent="." instance=ExtResource("poison_lobber" )]
+position = Vector2(5500, 1050)
+
+[node name="poison_lobberBay" type="Node2D" parent="."]
+position = Vector2(5050, 650)
+
+[node name="Border" type="Line2D" parent="poison_lobberBay"]
+points = PackedVector2Array(0, 0, 900, 0, 900, 850, 0, 850, 0, 0)
+width = 2.0
+default_color = Color(0.65, 0.4, 0.8, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="poison_lobberBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 880.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 25
+text = "MIRE LOBBER\nARC VOLLEY / GREEN LANDING MARKS / POISON POOLS"
+mouse_filter = 2
+
+[node name="Stunner" parent="." instance=ExtResource("stunner" )]
+position = Vector2(6650, 1050)
+
+[node name="stunnerBay" type="Node2D" parent="."]
+position = Vector2(6200, 650)
+
+[node name="Border" type="Line2D" parent="stunnerBay"]
+points = PackedVector2Array(0, 0, 900, 0, 900, 850, 0, 850, 0, 0)
+width = 2.0
+default_color = Color(0.65, 0.4, 0.8, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="stunnerBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 880.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 25
+text = "DISRUPTOR\nVIOLET BOLTS / BRIEF MOVEMENT + FIRE STUN"
+mouse_filter = 2
+
+[node name="Repulsor" parent="." instance=ExtResource("repulsor" )]
+position = Vector2(5500, 2300)
+
+[node name="repulsorBay" type="Node2D" parent="."]
+position = Vector2(5050, 1900)
+
+[node name="Border" type="Line2D" parent="repulsorBay"]
+points = PackedVector2Array(0, 0, 900, 0, 900, 850, 0, 850, 0, 0)
+width = 2.0
+default_color = Color(0.65, 0.4, 0.8, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="repulsorBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 880.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 25
+text = "REPULSOR\nCYAN BOLTS / PHYSICAL KNOCKBACK"
+mouse_filter = 2
+
+[node name="FireDash" parent="." instance=ExtResource("fire_dash" )]
+position = Vector2(6650, 2300)
+
+[node name="fire_dashBay" type="Node2D" parent="."]
+position = Vector2(6200, 1900)
+
+[node name="Border" type="Line2D" parent="fire_dashBay"]
+points = PackedVector2Array(0, 0, 900, 0, 900, 850, 0, 850, 0, 0)
+width = 2.0
+default_color = Color(0.65, 0.4, 0.8, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="fire_dashBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 880.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 25
+text = "CINDER RUNNER\nDASH WINDUP / LINGERING BURNING TRAIL"
+mouse_filter = 2
+
+[node name="Laser" parent="." instance=ExtResource("laser" )]
+position = Vector2(5500, 3550)
+
+[node name="laserBay" type="Node2D" parent="."]
+position = Vector2(5050, 3150)
+
+[node name="Border" type="Line2D" parent="laserBay"]
+points = PackedVector2Array(0, 0, 900, 0, 900, 850, 0, 850, 0, 0)
+width = 2.0
+default_color = Color(0.65, 0.4, 0.8, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="laserBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 880.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 25
+text = "PRISM LANCER\nTHIN WARNING LINE / LOCKED DIRECTION / LASER"
+mouse_filter = 2
+
+[node name="LinkedArtillery" parent="." instance=ExtResource("linked_artillery" )]
+position = Vector2(6650, 3550)
+life_link_path = NodePath("../LifeLink")
+
+[node name="linked_artilleryBay" type="Node2D" parent="."]
+position = Vector2(6200, 3150)
+
+[node name="Border" type="Line2D" parent="linked_artilleryBay"]
+points = PackedVector2Array(0, 0, 900, 0, 900, 850, 0, 850, 0, 0)
+width = 2.0
+default_color = Color(0.65, 0.4, 0.8, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="linked_artilleryBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 880.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 25
+text = "LINKED COLOSSUS\nIMMUNE WHILE LINK LIVES / LARGE SLOW ROUNDS"
+mouse_filter = 2
+
+[node name="LinkGuide" type="Label" parent="."]
+offset_left = 5250.0
+offset_top = 4350.0
+offset_right = 6100.0
+offset_bottom = 4450.0
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(1, 0.4, 0.8, 1)
+text = "REMOTE LIFE LINK / 40 HP
+Break this to expose the Linked Colossus."
+mouse_filter = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://features/player/player.gd" id="1"]
 [ext_resource type="PackedScene" path="res://visuals/shapes/shape_visual.tscn" id="2"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" path="res://assets/audio/kill.wav" id="depleted"]
 
 [ext_resource type="Shader" path="res://visuals/effects/target_hit.gdshader" id="hit_shader"]
+[ext_resource type="PackedScene" path="res://features/player/player_status.tscn" id="status"]
 [sub_resource type="ShaderMaterial" id="HitMaterial"]
 resource_local_to_scene = true
 shader = ExtResource("hit_shader")
@@ -89,3 +90,5 @@ volume_db = -13.0
 bus = &"Combat"
 script = ExtResource("audio_script")
 minimum_interval = 0.2
+
+[node name="PlayerStatus" parent="." instance=ExtResource("status")]

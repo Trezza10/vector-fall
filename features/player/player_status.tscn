@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://features/player/player_status.gd" id="script"]
+[ext_resource type="Script" path="res://features/audio/action_sound.gd" id="sound"]
+[ext_resource type="AudioStream" path="res://assets/audio/poison.wav" id="poison"]
+[ext_resource type="AudioStream" path="res://assets/audio/burn.wav" id="burn"]
+[ext_resource type="AudioStream" path="res://assets/audio/status.wav" id="stun"]
+[node name="PlayerStatus" type="Node"]
+script = ExtResource("script")
+[node name="PoisonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("poison")
+script = ExtResource("sound")
+bus = &"Effects"
+volume_db = -14.0
+[node name="BurnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("burn")
+script = ExtResource("sound")
+bus = &"Effects"
+volume_db = -14.0
+[node name="StunSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("stun")
+script = ExtResource("sound")
+bus = &"Effects"
+volume_db = -14.0

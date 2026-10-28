@@ -121,7 +121,7 @@ func _check() -> void:
 	assert(player.hits_taken == 1 and not is_instance_valid(shot))
 	assert(not player.receive_enemy_hit(1), "Grace window prevents contact-hit spam")
 	var wall_shot: EnemyProjectile = load("res://features/enemies/enemy_projectile.tscn").instantiate()
-	wall_shot.position = Vector2(4750, 900)
+	wall_shot.position = Vector2(7150, 900)
 	wall_shot.heading = Vector2.RIGHT
 	wall_shot.speed = 900.0
 	lab.get_node("EnemyProjectiles").add_child(wall_shot)

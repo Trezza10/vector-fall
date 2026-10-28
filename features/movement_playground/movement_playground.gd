@@ -95,6 +95,7 @@ func _on_player_reset() -> void:
 func reset_playground() -> void:
 	_player.reset_to_spawn()
 	$EnemyField.reset_encounter()
+	$AdvancedField.reset_encounter()
 	for shot: Node in $EnemyProjectiles.get_children(): shot.queue_free()
 	_camera.reset_smoothing()
 
