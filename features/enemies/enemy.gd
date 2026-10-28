@@ -84,6 +84,8 @@ func _physics_process(delta: float) -> void:
 		return
 	_attack_remaining -= delta
 	match definition.kind:
+		EnemyDefinition.Kind.SILENCER:
+			_update_silencer(delta)
 		EnemyDefinition.Kind.RADIAL, EnemyDefinition.Kind.SPIRAL:
 			velocity = velocity.move_toward(Vector2.ZERO, definition.acceleration * delta)
 			_update_shooting()
@@ -237,3 +239,33 @@ func reset_encounter() -> void:
 	_label.show()
 	show()
 	set_physics_process(true)
+
+func _update_silencer(delta: float) -> void:
+	if _phase == Phase.WINDUP:
+		velocity = Vector2.ZERO
+		_phase_remaining -= delta
+		_warning.scale = Vector2.ONE * definition.silence_radius / 43.0
+		_warning.modulate.a = 0.45 + 0.5 * absf(sin(_phase_remaining * 12.0))
+		if _phase_remaining <= 0.0:
+			if _player.is_alive and global_position.distance_to(_player.global_position) <= definition.silence_radius:
+				_player.shooter.apply_silence(definition.silence_duration)
+			$BurstSound.trigger()
+			_phase = Phase.RECOVERY
+			_phase_remaining = 0.3
+	elif _phase == Phase.RECOVERY:
+		_phase_remaining -= delta
+		_warning.scale += Vector2.ONE * delta * 6.0
+		_warning.modulate.a = maxf(0.0, _phase_remaining / 0.3)
+		if _phase_remaining <= 0.0:
+			_phase = Phase.HUNT
+			_attack_remaining = definition.attack_interval
+			_warning.hide()
+	else:
+		_move_toward(_player.global_position, definition.move_speed, delta, definition.silence_radius * 0.75)
+		if _attack_remaining <= 0.0 and global_position.distance_to(_player.global_position) <= definition.silence_radius:
+			_phase = Phase.WINDUP
+			_phase_remaining = definition.windup_time
+			_warning.default_color = Color(0.8, 0.4, 1.0)
+			_warning.scale = Vector2.ONE * definition.silence_radius / 43.0
+			_warning.show()
+			$WindupSound.trigger()

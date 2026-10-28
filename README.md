@@ -1,7 +1,7 @@
 # Vector Fall
 
 A Godot 4.7 technical-interface action playground with smooth movement, charge-based
-dash upgrades, automatic weapons, stackable effects, seven enemy archetypes and player health.
+dash upgrades, automatic weapons, stackable effects, eight enemy archetypes and player health.
 
 **Play:** https://Trezza10.github.io/vector-fall/
 
@@ -73,3 +73,5 @@ Phone compatibility still needs playtesting on physical devices, especially iOS/
 Web builds use Godot's sample audio path; desktop-only audio bus effects such as the hard
 limiter do not apply there. No accounts, server multiplayer or native mobile package are
 required to play this build.
+
+Portrait phones use a taller camera layout, top health display and independent bottom touch sticks. Both orientations work without reloading. Violet Silencers warn with a radius ring before applying a 2.5-second firing lock; leave the ring before the pulse to evade it. Movement and dash remain available.

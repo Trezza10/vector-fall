@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 	_move.enabled = not paused
 	_aim.enabled = not paused
 	var viewport: Vector2 = get_viewport().get_visible_rect().size
-	$Dash.position = Vector2(viewport.x - 250, viewport.y - 510)
+	$Dash.position = Vector2(viewport.x - 250, viewport.y - 530)
 	$Pause.position = Vector2(viewport.x - 162, 24)
 	$Reset.position = Vector2(viewport.x - 162, 130)
 

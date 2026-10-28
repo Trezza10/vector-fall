@@ -453,3 +453,17 @@ position = Vector2(720, 800)
 position = Vector2(400, 1180)
 
 [node name="TouchControls" parent="." instance=ExtResource("touch")]
+
+[node name="SilenceStatus" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_right = 220.0
+offset_top = 220.0
+offset_bottom = 260.0
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.85, 0.5, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "SILENCED / 2.5s"
+mouse_filter = 2

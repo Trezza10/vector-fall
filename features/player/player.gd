@@ -129,6 +129,7 @@ func reset_to_spawn() -> void:
 	$ResetSound.trigger()
 	_current_hp = maxi(1, max_hp)
 	shooter.firing_blocked = false
+	shooter.silence_remaining = 0.0
 	health_changed.emit(_current_hp, max_hp)
 	hits_taken = 0
 	_hurt_remaining = 0.0

@@ -17,7 +17,7 @@ func _check() -> void:
 			enemy.set_physics_process(false)
 			enemies.append(enemy)
 	await physics_frame
-	assert(enemies.size() == 7)
+	assert(enemies.size() == 8)
 	var tank: PlaygroundEnemy = field.get_node("Bulwark")
 	var runner: PlaygroundEnemy = field.get_node("Skitter")
 	var radial: PlaygroundEnemy = field.get_node("Radial")
@@ -148,7 +148,7 @@ func _check() -> void:
 	assert(player.hits_taken == 0 and lab.get_node("EnemyProjectiles").get_child_count() == 0)
 	for enemy: PlaygroundEnemy in enemies:
 		assert(enemy.is_alive and enemy.current_hp == enemy.max_hp and not enemy._engaged)
-	print("PASS: seven authored archetypes, HP/size/speed differences, range activation, pursuit, alternating half-step rings, spiral angles, locked charge windup/burst, evasive dash, stun/chill, critical damage, fixed splitting, nonrespawning fragments, real hostile hits/walls, grace, pause and encounter reset")
+	print("PASS: eight authored archetypes, HP/size/speed differences, range activation, pursuit, alternating half-step rings, spiral angles, locked charge windup/burst, evasive dash, stun/chill, critical damage, fixed splitting, nonrespawning fragments, real hostile hits/walls, grace, pause and encounter reset")
 	lab.queue_free()
 	await create_timer(0.5).timeout
 	quit()

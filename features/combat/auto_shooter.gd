@@ -18,6 +18,12 @@ class ModifierStack:
 @export var auto_fire_enabled: bool = true
 
 var firing_blocked: bool = false
+var silence_remaining: float = 0.0
+
+func apply_silence(duration: float) -> void:
+	if get_tree().paused or duration <= 0.0: return
+	silence_remaining = maxf(silence_remaining, duration)
+
 
 var dash_charge_bonus: int = 0
 var dash_cooldown_reduction: float = 0.0
@@ -48,8 +54,9 @@ func configure(spawn_parent: Node2D, owner_body: PhysicsBody2D) -> void:
 	modifiers_changed.emit()
 
 func _physics_process(delta: float) -> void:
+	silence_remaining = maxf(0.0, silence_remaining - delta)
 	_update_modifiers(delta)
-	if firing_blocked or not auto_fire_enabled or _working_weapon == null or _spawn_parent == null: return
+	if silence_remaining > 0.0 or firing_blocked or not auto_fire_enabled or _working_weapon == null or _spawn_parent == null: return
 	_time_until_shot -= delta
 	if _time_until_shot <= 0.0:
 		fire_volley()
@@ -156,7 +163,7 @@ func _rebuild_weapon() -> void:
 	_time_until_shot = clampf(_time_until_shot * previous_rate, 0.0, 1.0) / _working_weapon.attacks_per_second
 
 func fire_volley() -> int:
-	if get_tree().paused or firing_blocked or _working_weapon == null or _spawn_parent == null: return 0
+	if get_tree().paused or silence_remaining > 0.0 or firing_blocked or _working_weapon == null or _spawn_parent == null: return 0
 	var direction: Vector2 = aim_direction.normalized()
 	if direction.is_zero_approx(): return 0
 	var angles: PackedFloat32Array = _working_weapon.spread_angles()

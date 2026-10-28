@@ -16,6 +16,8 @@ var _preferences: ControlPreferences = ControlPreferences.new()
 var _hud_elapsed: float = 0.0
 
 func _ready() -> void:
+	get_tree().root.size_changed.connect(_update_phone_layout)
+	_update_phone_layout()
 	_player.health_changed.connect(_on_player_health_changed)
 	_player.reset_performed.connect(_on_player_reset)
 	$PlayerDamageFeedback.configure(_player, _camera, _player_health)
@@ -51,6 +53,8 @@ func _update_combat_hud() -> void:
 	$CanvasLayer/EnemyHint.visible = not _player.touch_input_enabled
 
 func _process(delta: float) -> void:
+	$CanvasLayer/SilenceStatus.visible = _player.shooter.silence_remaining > 0.0 and _player.is_alive
+	$CanvasLayer/SilenceStatus.text = "SILENCED / %.1fs" % _player.shooter.silence_remaining
 	_dash_meter.value = 1.0 - _player.dash_cooldown_remaining / _player.effective_dash_cooldown
 	_dash_hint.text = "SPACE / RB  Dash %d/%d  |  %.2fs recharge" % [
 		_player.dash_charges, _player.max_dash_charges, _player.effective_dash_cooldown]
@@ -94,3 +98,19 @@ func reset_playground() -> void:
 
 func _apply_camera_zoom(percent: float) -> void:
 	_camera.zoom = Vector2.ONE * (1.0 + clampf(percent, 0.0, 100.0) / 100.0)
+
+func _update_phone_layout() -> void:
+	var window: Window = get_tree().root
+	var portrait: bool = window.size.x < window.size.y
+	var design: Vector2i = Vector2i(900, 1440) if portrait else Vector2i(1440, 900)
+	if window.content_scale_size != design:
+		$TouchControls._clear_sticks()
+		window.content_scale_size = design
+	_pause_menu.apply_portrait_layout(portrait)
+	var health: Control = $CanvasLayer/PlayerHealth
+	var hint: Control = $CanvasLayer/PlayerHealthHint
+	health.anchor_top = 0.0 if portrait else 1.0
+	health.anchor_bottom = health.anchor_top
+	health.offset_top = 48.0 if portrait else -118.0
+	health.offset_bottom = health.offset_top + 24.0
+	hint.visible = not portrait

@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="PackedScene" path="res://features/enemies/enemy_base.tscn" id="base"]
+[ext_resource type="Resource" path="res://data/enemies/silencer.tres" id="definition"]
+[ext_resource type="Resource" path="res://data/shapes/enemy_spiral.tres" id="shape"]
+[ext_resource type="Resource" path="res://data/palettes/enemy_silencer.tres" id="colors"]
+[sub_resource type="CircleShape2D" id="Body"]
+radius = 25.0
+[node name="Silencer" instance=ExtResource("base")]
+definition = ExtResource("definition")
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("Body")
+[node name="ShapeVisual" parent="." index="1"]
+definition = ExtResource("shape")
+colors = ExtResource("colors")
+[node name="Label" parent="." index="2"]
+offset_top = 37.0
+offset_bottom = 62.0
+text = "SILENCER"
+[node name="HealthBar" parent="." index="3"]
+scale = Vector2(1.0, 1.0)

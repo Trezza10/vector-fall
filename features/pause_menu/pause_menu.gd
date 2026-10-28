@@ -142,3 +142,13 @@ func _zoom_slider() -> HSlider:
 func _on_zoom_changed(value: float) -> void:
 	$Overlay/Center/Panel/Margin/Settings/Tabs/Graphics/Content/ZoomLabel.text = "CAMERA ZOOM  %d%%" % roundi(value)
 	camera_zoom_previewed.emit(value)
+
+func apply_portrait_layout(portrait: bool) -> void:
+	$Overlay/Center/Panel.custom_minimum_size = Vector2(840, 780) if portrait else Vector2(660, 560)
+	_overlay.theme.default_font_size = 28 if portrait else 18
+	for button: Button in [_resume, _settings_button, $Overlay/Center/Panel/Margin/Main/Quit,
+		$Overlay/Center/Panel/Margin/Settings/Buttons/Apply, $Overlay/Center/Panel/Margin/Settings/Buttons/Back]:
+		button.custom_minimum_size.y = 90.0 if portrait else 0.0
+	_zoom_slider().custom_minimum_size.y = 90.0 if portrait else 48.0
+	for bus: String in ["Master", "Combat", "Effects", "UI"]:
+		_sound_content().get_node(bus + "Row/Volume").custom_minimum_size.y = 80.0 if portrait else 0.0

@@ -1,7 +1,7 @@
 class_name EnemyDefinition
 extends Resource
 
-enum Kind { TANK, RUNNER, DASHER, RADIAL, SPIRAL, CHARGER, SPLITTER, MINI }
+enum Kind { TANK, RUNNER, DASHER, RADIAL, SPIRAL, CHARGER, SPLITTER, MINI, SILENCER }
 
 @export var display_name: String = "Enemy"
 @export var kind: Kind = Kind.TANK
@@ -24,3 +24,7 @@ enum Kind { TANK, RUNNER, DASHER, RADIAL, SPIRAL, CHARGER, SPLITTER, MINI }
 @export_range(0.5, 8.0, 0.1) var bullet_lifetime: float = 4.0
 @export_range(1, 100, 1) var bullet_damage: int = 1
 @export_range(1.0, 90.0, 1.0) var spiral_step_degrees: float = 19.0
+
+@export_group("Silence pulse")
+@export_range(60.0, 600.0, 10.0) var silence_radius: float = 240.0
+@export_range(0.2, 6.0, 0.1) var silence_duration: float = 2.5
