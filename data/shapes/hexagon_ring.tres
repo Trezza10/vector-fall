@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShapeDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://visuals/shapes/shape_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "Hexagon ring"
+geometry = 3
+radius = 27.0
+outline_width = 2.0
+inner_scale = 0.66
+detail_style = 2

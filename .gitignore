@@ -1,0 +1,12 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Generated exports, caches, local credentials and editor tools
+/build/
+.env
+.env.*
+!.env.example
+/export_credentials.cfg
+*.log
+__pycache__/

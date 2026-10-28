@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/target_dummy/target_damage_numbers.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/target_dummy/floating_damage_number.tscn" id="number"]
+
+[node name="DamageNumbers" type="Node2D"]
+script = ExtResource("script")
+
+[node name="Bullet" parent="." instance=ExtResource("number")]
+number_color = Color(1, 1, 1, 1)
+spawn_offset = Vector2(0, -88)
+drift_velocity = Vector2(0, -42)
+
+[node name="Burn" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.2, 0.15, 1)
+spawn_offset = Vector2(-24, -116)
+drift_velocity = Vector2(-6, -42)
+
+[node name="Poison" parent="." instance=ExtResource("number")]
+number_color = Color(0.4, 1, 0.25, 1)
+spawn_offset = Vector2(24, -116)
+drift_velocity = Vector2(6, -42)
+
+[node name="Ice" parent="." instance=ExtResource("number")]
+number_color = Color(0.3, 0.8, 1, 1)
+spawn_offset = Vector2(-40, -140)
+
+[node name="Stun" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.86, 0.25, 1)
+spawn_offset = Vector2(40, -140)
+
+[node name="Knockback" parent="." instance=ExtResource("number")]
+number_color = Color(0.8, 0.85, 0.95, 1)
+spawn_offset = Vector2(-24, -164)
+
+[node name="Mark" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.35, 0.7, 1)
+spawn_offset = Vector2(24, -164)
+
+[node name="BulletAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(1, 1, 1, 1)
+spawn_offset = Vector2(0, -88)
+drift_velocity = Vector2(0, -42)
+
+[node name="BurnAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.2, 0.15, 1)
+spawn_offset = Vector2(-24, -116)
+drift_velocity = Vector2(-6, -42)
+
+[node name="PoisonAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(0.4, 1, 0.25, 1)
+spawn_offset = Vector2(24, -116)
+drift_velocity = Vector2(6, -42)
+
+[node name="IceAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(0.3, 0.8, 1, 1)
+spawn_offset = Vector2(-40, -140)
+
+[node name="StunAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.86, 0.25, 1)
+spawn_offset = Vector2(40, -140)
+
+[node name="KnockbackAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(0.8, 0.85, 0.95, 1)
+spawn_offset = Vector2(-24, -164)
+
+[node name="MarkAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.35, 0.7, 1)
+spawn_offset = Vector2(24, -164)
+
+[node name="Critical" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.78, 0.16, 1)
+text_prefix = "CRIT "
+font_size = 36
+punch_scale = 1.8
+punch_duration = 0.28
+spawn_offset = Vector2(0, -112)
+drift_velocity = Vector2(0, -38)
+tilt_variation_degrees = 6.0
+
+[node name="CriticalAlternate" parent="." instance=ExtResource("number")]
+number_color = Color(1, 0.78, 0.16, 1)
+text_prefix = "CRIT "
+font_size = 36
+punch_scale = 1.8
+punch_duration = 0.28
+spawn_offset = Vector2(0, -112)
+drift_velocity = Vector2(0, -38)
+tilt_variation_degrees = 6.0

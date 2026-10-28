@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3]
+[ext_resource type="Script" path="res://features/enemies/enemy_field.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/enemies/bulwark.tscn" id="bulwark"]
+[ext_resource type="PackedScene" path="res://features/enemies/skitter.tscn" id="skitter"]
+[ext_resource type="PackedScene" path="res://features/enemies/wisp.tscn" id="wisp"]
+[ext_resource type="PackedScene" path="res://features/enemies/radial.tscn" id="radial"]
+[ext_resource type="PackedScene" path="res://features/enemies/spiral.tscn" id="spiral"]
+[ext_resource type="PackedScene" path="res://features/enemies/charger.tscn" id="charger"]
+[ext_resource type="PackedScene" path="res://features/enemies/splitter.tscn" id="splitter"]
+[ext_resource type="PackedScene" path="res://features/enemies/fragment.tscn" id="fragment"]
+
+[node name="EnemyField" type="Node2D"]
+script = ExtResource("script")
+[node name="Boundary" type="Line2D" parent="."]
+points = PackedVector2Array(90, 170, 620, 170, 620, 1480, 90, 1480, 90, 170)
+width = 1.0
+default_color = Color(0.7, 0.3, 0.2, 0.3)
+z_index = -2
+[node name="Title" type="Label" parent="."]
+offset_left = 105.0
+offset_top = 102.0
+offset_right = 640.0
+offset_bottom = 164.0
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 0.6, 0.3, 1)
+text = "HOSTILE FIELD / 7 ARCHETYPES
+Approach to engage. R resets the encounter."
+
+[node name="Bulwark" parent="." instance=ExtResource("bulwark" )]
+position = Vector2(260, 320)
+
+[node name="Skitter" parent="." instance=ExtResource("skitter" )]
+position = Vector2(540, 380)
+
+[node name="Wisp" parent="." instance=ExtResource("wisp" )]
+position = Vector2(500, 740)
+
+[node name="Radial" parent="." instance=ExtResource("radial" )]
+position = Vector2(250, 670)
+
+[node name="Spiral" parent="." instance=ExtResource("spiral" )]
+position = Vector2(240, 1020)
+
+[node name="Charger" parent="." instance=ExtResource("charger" )]
+position = Vector2(530, 1260)
+
+[node name="Splitter" parent="." instance=ExtResource("splitter" )]
+position = Vector2(260, 1360)
+split_children = Array[NodePath]([NodePath("../SplitMinis/FragmentA"), NodePath("../SplitMinis/FragmentB"), NodePath("../SplitMinis/FragmentC")])
+
+[node name="SplitMinis" type="Node2D" parent="."]
+
+[node name="FragmentA" parent="SplitMinis" instance=ExtResource("fragment")]
+position = Vector2(-28, -14)
+player_path = NodePath("../../../Player")
+projectile_parent_path = NodePath("../../../EnemyProjectiles")
+starts_dormant = true
+respawn_on_death = false
+split_offset = Vector2(-28, -14)
+
+[node name="FragmentB" parent="SplitMinis" instance=ExtResource("fragment")]
+position = Vector2(28, -14)
+player_path = NodePath("../../../Player")
+projectile_parent_path = NodePath("../../../EnemyProjectiles")
+starts_dormant = true
+respawn_on_death = false
+split_offset = Vector2(28, -14)
+
+[node name="FragmentC" parent="SplitMinis" instance=ExtResource("fragment")]
+position = Vector2(0, 30)
+player_path = NodePath("../../../Player")
+projectile_parent_path = NodePath("../../../EnemyProjectiles")
+starts_dormant = true
+respawn_on_death = false
+split_offset = Vector2(0, 30)

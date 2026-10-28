@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/target_dummy/floating_damage_number.gd" id="script"]
+
+[sub_resource type="SystemFont" id="TechnicalFont"]
+font_names = PackedStringArray("Cascadia Mono", "Consolas", "DejaVu Sans Mono", "monospace")
+font_weight = 700
+
+[node name="FloatingDamageNumber" type="Node2D"]
+top_level = true
+physics_interpolation_mode = 2
+visible = false
+z_index = 20
+script = ExtResource("script")
+
+[node name="Value" type="Label" parent="."]
+offset_left = -110.0
+offset_top = -22.0
+offset_right = 110.0
+offset_bottom = 22.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.04, 0.055, 0.95)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("TechnicalFont")
+theme_override_font_sizes/font_size = 22
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

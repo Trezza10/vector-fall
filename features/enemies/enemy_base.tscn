@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="PackedScene" path="res://features/target_dummy/target_dummy.tscn" id="target"]
+[ext_resource type="Script" path="res://features/enemies/enemy.gd" id="script"]
+[ext_resource type="Script" path="res://features/audio/action_sound.gd" id="audio"]
+[ext_resource type="AudioStream" path="res://assets/audio/status.wav" id="windup"]
+[ext_resource type="AudioStream" path="res://assets/audio/dash.wav" id="burst"]
+[ext_resource type="AudioStream" path="res://assets/audio/shot.wav" id="shot"]
+[sub_resource type="Gradient" id="Fade"]
+colors = PackedColorArray(1, 0.65, 0.2, 0.7, 1, 0.2, 0.1, 0)
+[node name="Enemy" instance=ExtResource("target")]
+script = ExtResource("script")
+respawn_on_death = true
+respawn_delay = 8.0
+[node name="WarningRing" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(43.000, 0.000, 42.174, 8.389, 39.727, 16.455, 35.753, 23.890, 30.406, 30.406, 23.890, 35.753, 16.455, 39.727, 8.389, 42.174, 0.000, 43.000, -8.389, 42.174, -16.455, 39.727, -23.890, 35.753, -30.406, 30.406, -35.753, 23.890, -39.727, 16.455, -42.174, 8.389, -43.000, 0.000, -42.174, -8.389, -39.727, -16.455, -35.753, -23.890, -30.406, -30.406, -23.890, -35.753, -16.455, -39.727, -8.389, -42.174, -0.000, -43.000, 8.389, -42.174, 16.455, -39.727, 23.890, -35.753, 30.406, -30.406, 35.753, -23.890, 39.727, -16.455, 42.174, -8.389, 43.000, -0.000)
+width = 2.5
+default_color = Color(1, 0.6, 0.15, 0.9)
+[node name="AimLine" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 130, 0)
+width = 3.0
+default_color = Color(1, 0.28, 0.12, 0.6)
+[node name="BurstTrail" type="Line2D" parent="."]
+top_level = true
+width = 7.0
+default_color = Color(1, 0.35, 0.16, 0.35)
+z_index = -1
+[node name="BurstParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.25
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+scale_amount_min = 1.0
+scale_amount_max = 2.5
+color_ramp = SubResource("Fade")
+[node name="WindupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("windup")
+volume_db = -16.0
+bus = &"Effects"
+script = ExtResource("audio")
+minimum_interval = 0.2
+[node name="BurstSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("burst")
+volume_db = -18.0
+bus = &"Effects"
+script = ExtResource("audio")
+minimum_interval = 0.2
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("shot")
+volume_db = -23.0
+bus = &"Combat"
+script = ExtResource("audio")
+minimum_interval = 0.09

@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3]
+[ext_resource type="Script" path="res://features/pickups/upgrade_pickup.gd" id="script"]
+[ext_resource type="PackedScene" path="res://visuals/shapes/shape_visual.tscn" id="visual"]
+[ext_resource type="Resource" path="res://data/modifications/multishot.tres" id="default"]
+[ext_resource type="Script" path="res://visuals/shapes/shape_definition.gd" id="shape_type"]
+[ext_resource type="Script" path="res://features/audio/action_sound.gd" id="audio_script"]
+[ext_resource type="AudioStream" path="res://assets/audio/pickup.wav" id="audio_PickupSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/recharge.wav" id="audio_RechargeSound"]
+
+[sub_resource type="CircleShape2D" id="Body"]
+radius = 26.0
+[sub_resource type="Resource" id="CoreShape"]
+script = ExtResource("shape_type")
+display_name = "Upgrade core"
+geometry = 4
+radius = 13.0
+outline_width = 2.0
+inner_scale = 0.55
+detail_style = 1
+[sub_resource type="Resource" id="RingShape"]
+script = ExtResource("shape_type")
+display_name = "Upgrade halo"
+geometry = 3
+radius = 23.0
+outline_width = 1.0
+detail_style = 0
+[sub_resource type="Gradient" id="Fade"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[node name="UpgradePickup" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("script")
+modification = ExtResource("default")
+respawn_seconds = 8.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Body")
+[node name="Visual" type="Node2D" parent="."]
+[node name="Ring" parent="Visual" instance=ExtResource("visual")]
+definition = SubResource("RingShape")
+[node name="Core" parent="Visual" instance=ExtResource("visual")]
+definition = SubResource("CoreShape")
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -120.0
+offset_top = 34.0
+offset_right = 120.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 12
+text = "MULTISHOT"
+horizontal_alignment = 1
+[node name="DetailLabel" type="Label" parent="."]
+offset_left = -120.0
+offset_top = 54.0
+offset_right = 120.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.55, 0.67, 0.71, 1)
+text = "+1 bullet / RUN"
+horizontal_alignment = 1
+[node name="RespawnTimer" type="Timer" parent="."]
+one_shot = true
+process_callback = 0
+[node name="CollectBurst" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 18
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 35.0
+initial_velocity_max = 85.0
+damping_min = 50.0
+damping_max = 80.0
+scale_amount_min = 0.8
+scale_amount_max = 2.0
+color_ramp = SubResource("Fade")
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_PickupSound")
+volume_db = -10.0
+max_polyphony = 3
+bus = &"Effects"
+script = ExtResource("audio_script")
+minimum_interval = 0.1
+
+[node name="RechargeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_RechargeSound")
+volume_db = -24.0
+max_polyphony = 3
+bus = &"Effects"
+script = ExtResource("audio_script")
+minimum_interval = 0.1

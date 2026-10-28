@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vector Fall</title>
+<style>body{background:#09151b;color:#a8e9df;font:18px system-ui;display:grid;place-content:center;min-height:90vh;margin:0;padding:24px}a{color:#69edc9}p{max-width:32em}</style></head>
+<body><main><h1>VECTOR FALL</h1><p id="status" role="status">Finding the latest build…</p><a href="" id="retry" hidden>Try again</a></main>
+<script>
+(async()=>{try{const r=await fetch('build.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('Build information is not available yet.');const b=await r.json();if(!/^game-[a-zA-Z0-9-]+\.html$/.test(b.entry))throw Error('Invalid build entry.');location.replace(new URL(b.entry,location.href).href);}catch(e){document.getElementById('status').textContent=e.message;document.getElementById('retry').hidden=false;}})();
+</script></body></html>

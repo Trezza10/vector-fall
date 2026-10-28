@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatusEffectDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/combat/status_effect_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+kind = 2
+display_name = "Ice"
+duration_seconds = 2.5
+potency = 0.15
+tick_interval = 0.5
+color = Color(0.3, 0.78, 1, 1)

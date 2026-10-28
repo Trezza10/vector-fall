@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://features/pickups/upgrade_pickup.tscn" id="pickup"]
+[ext_resource type="Resource" path="res://data/palettes/healing_colors.tres" id="colors"]
+[ext_resource type="Resource" path="res://data/shapes/healing_cross.tres" id="cross"]
+[node name="HealingPickup" instance=ExtResource("pickup")]
+modification = null
+healing_amount = 25
+healing_colors = ExtResource("colors")
+respawn_seconds = 10.0
+
+[node name="Core" parent="Visual" index="1"]
+definition = ExtResource("cross")

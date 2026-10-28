@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="WeaponModification" load_steps=6 format=3]
+[ext_resource type="Script" path="res://features/pickups/weapon_modification.gd" id="mod"]
+[ext_resource type="Script" path="res://visuals/shapes/shape_colors.gd" id="colors"]
+[ext_resource type="Script" path="res://features/combat/status_effect_definition.gd" id="type"]
+[ext_resource type="Resource" path="res://data/effects/ice.tres" id="effect"]
+[sub_resource type="Resource" id="Colors"]
+script = ExtResource("colors")
+fill = Color(0.06, 0.12, 0.14, 1)
+outline = Color(0.3, 0.78, 1, 1)
+detail = Color(0.3, 0.78, 1, 0.5)
+highlight = Color(0.9, 1, 0.98, 1)
+[resource]
+script = ExtResource("mod")
+id = &"ice"
+display_name = "Ice"
+description = "+15% chill strength"
+duration_seconds = 0.0
+colors = SubResource("Colors")
+on_hit_effects = Array[ExtResource("type")]([ExtResource("effect")])

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/enemies/enemy_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+display_name = "Lancer"
+kind = 5
+health = 70
+move_speed = 64.0
+attack_interval = 1.8
+windup_time = 0.65
+burst_speed = 750.0
+burst_duration = 0.42
+recovery_time = 0.8
+contact_radius = 44.0

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://features/target_dummy/damage_health_bar.gd" id="script"]
+
+[sub_resource type="StyleBoxFlat" id="Track"]
+bg_color = Color(0.03, 0.06, 0.08, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.24, 0.31, 0.34, 1)
+
+[sub_resource type="StyleBoxFlat" id="Chip"]
+bg_color = Color(1, 0.68, 0.38, 1)
+
+[sub_resource type="StyleBoxFlat" id="Health"]
+bg_color = Color(0.42, 0.88, 0.78, 1)
+
+[sub_resource type="StyleBoxEmpty" id="Transparent"]
+
+[node name="DamageHealthBar" type="Control"]
+offset_left = -44.0
+offset_top = -64.0
+offset_right = 44.0
+offset_bottom = -40.0
+mouse_filter = 2
+script = ExtResource("script")
+
+[node name="Damage" type="ProgressBar" parent="."]
+offset_top = 16.0
+anchor_right = 1.0
+offset_bottom = 23.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+theme_override_styles/background = SubResource("Track")
+theme_override_styles/fill = SubResource("Chip")
+mouse_filter = 2
+
+[node name="Health" type="ProgressBar" parent="."]
+offset_top = 16.0
+anchor_right = 1.0
+offset_bottom = 23.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+theme_override_styles/background = SubResource("Transparent")
+theme_override_styles/fill = SubResource("Health")
+mouse_filter = 2
+
+[node name="Value" type="Label" parent="."]
+anchor_right = 1.0
+offset_bottom = 15.0
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.64, 0.75, 0.77, 1)
+horizontal_alignment = 1
+text = "20"

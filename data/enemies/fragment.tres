@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/enemies/enemy_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+display_name = "Fragment"
+kind = 7
+health = 12
+move_speed = 155.0
+contact_radius = 32.0

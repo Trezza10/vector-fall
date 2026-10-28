@@ -1,0 +1,130 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Vector Fall"
+run/main_scene="res://features/movement_playground/movement_playground.tscn"
+config/features=PackedStringArray("4.7", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1440
+window/size/viewport_height=900
+window/size/window_width_override=1280
+window/size/window_height_override=800
+window/size/mode=3
+window/size/mode.web=0
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[physics]
+
+common/physics_interpolation=true
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+renderer/rendering_method.web="gl_compatibility"
+
+rendering_device/driver.windows="d3d12"
+
+[input]
+
+dash={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":32), Object(InputEventJoypadButton,"button_index":10)]
+}
+
+ui_accept={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"keycode":4194309), Object(InputEventKey,"keycode":4194310), Object(InputEventKey,"keycode":32), Object(InputEventJoypadButton,"button_index":0)]
+}
+
+ui_cancel={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"keycode":4194305), Object(InputEventJoypadButton,"button_index":1)]
+}
+
+move_left={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":65)]
+}
+
+move_right={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":68)]
+}
+
+move_up={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":87)]
+}
+
+move_down={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":83)]
+}
+
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":4194305), Object(InputEventJoypadButton,"button_index":6)]
+}
+
+pad_left={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":0,"axis_value":-1.0), Object(InputEventJoypadButton,"button_index":13)]
+}
+
+pad_right={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":0,"axis_value":1.0), Object(InputEventJoypadButton,"button_index":14)]
+}
+
+pad_up={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":1,"axis_value":-1.0), Object(InputEventJoypadButton,"button_index":11)]
+}
+
+pad_down={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":1,"axis_value":1.0), Object(InputEventJoypadButton,"button_index":12)]
+}
+
+aim_left={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":2,"axis_value":-1.0)]
+}
+
+aim_right={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":2,"axis_value":1.0)]
+}
+
+aim_up={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":3,"axis_value":-1.0)]
+}
+
+aim_down={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"axis":3,"axis_value":1.0)]
+}
+
+
+
+
+
+toggle_auto_fire={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"physical_keycode":70)]
+}

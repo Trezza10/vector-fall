@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShapeDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://visuals/shapes/shape_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+display_name = "Spiral Weaver"
+geometry = 7
+radius = 25.0
+outline_width = 2.0
+inner_scale = 0.65
+detail_style = 2

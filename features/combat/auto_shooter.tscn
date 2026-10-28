@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://features/combat/auto_shooter.gd" id="script"]
+[ext_resource type="Script" path="res://features/combat/weapon_definition.gd" id="weapon_type"]
+[ext_resource type="Resource" path="res://data/weapons/pulse.tres" id="pulse"]
+[ext_resource type="Resource" path="res://data/weapons/fan.tres" id="fan"]
+[ext_resource type="Resource" path="res://data/weapons/lance.tres" id="lance"]
+[ext_resource type="Script" path="res://features/audio/action_sound.gd" id="audio_script"]
+[ext_resource type="AudioStream" path="res://assets/audio/shot.wav" id="audio_ShotSound"]
+
+[node name="AutoShooter" type="Node2D"]
+script = ExtResource("script")
+arsenal = Array[ExtResource("weapon_type")]([ExtResource("pulse"), ExtResource("fan"), ExtResource("lance")])
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_ShotSound")
+volume_db = -19.0
+max_polyphony = 3
+bus = &"Combat"
+script = ExtResource("audio_script")
+minimum_interval = 0.045

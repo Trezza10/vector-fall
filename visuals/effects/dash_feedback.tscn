@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://visuals/effects/dash_feedback.gd" id="script"]
+[ext_resource type="Shader" path="res://visuals/effects/dash_pulse.gdshader" id="shader"]
+
+[sub_resource type="ShaderMaterial" id="PulseMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("shader")
+shader_parameter/strength = 0.0
+
+[sub_resource type="Curve" id="Taper"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 0, Vector2(1, 1), 1.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="TrailGradient"]
+colors = PackedColorArray(0.15, 0.55, 0.6, 0, 0.45, 1, 0.85, 0.7)
+
+[sub_resource type="Gradient" id="SparkGradient"]
+offsets = PackedFloat32Array(0, 0.2, 1)
+colors = PackedColorArray(0.85, 1, 0.95, 1, 0.4, 0.95, 0.8, 0.8, 0.1, 0.4, 0.5, 0)
+
+[sub_resource type="Curve" id="SparkSize"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 0, Vector2(1, 0), -1.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="DashFeedback" type="Node2D"]
+show_behind_parent = true
+script = ExtResource("script")
+
+[node name="Trail" type="Line2D" parent="."]
+top_level = true
+physics_interpolation_mode = 2
+width = 18.0
+width_curve = SubResource("Taper")
+gradient = SubResource("TrailGradient")
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="Pulse" type="ColorRect" parent="."]
+material = SubResource("PulseMaterial")
+offset_left = -45.0
+offset_top = -60.0
+offset_right = 45.0
+offset_bottom = 60.0
+pivot_offset = Vector2(45, 60)
+mouse_filter = 2
+
+[node name="Sparks" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.24
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector2(1, 0)
+spread = 26.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 45.0
+initial_velocity_max = 120.0
+damping_min = 80.0
+damping_max = 140.0
+scale_amount_min = 1.0
+scale_amount_max = 2.2
+scale_amount_curve = SubResource("SparkSize")
+color_ramp = SubResource("SparkGradient")

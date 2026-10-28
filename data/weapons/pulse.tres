@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/combat/weapon_definition.gd" id="script"]
+[ext_resource type="Resource" path="res://data/weapons/pulse_projectile.tres" id="projectile"]
+[ext_resource type="PackedScene" path="res://features/combat/combat_projectile.tscn" id="scene"]
+[resource]
+script = ExtResource("script")
+display_name = "PULSE / precise"
+attacks_per_second = 5.0
+bullet_count = 1
+spread_degrees = 0.0
+muzzle_distance = 26.0
+projectile = ExtResource("projectile")
+projectile_scene = ExtResource("scene")

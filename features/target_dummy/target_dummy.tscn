@@ -1,0 +1,140 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://features/target_dummy/target_dummy.gd" id="script"]
+[ext_resource type="PackedScene" path="res://visuals/shapes/shape_visual.tscn" id="visual"]
+[ext_resource type="Resource" path="res://data/shapes/target_dummy.tres" id="shape"]
+[ext_resource type="Resource" path="res://data/palettes/target_dummy_colors.tres" id="colors"]
+
+[ext_resource type="PackedScene" path="res://features/target_dummy/damage_health_bar.tscn" id="bar"]
+[ext_resource type="Shader" path="res://visuals/effects/target_hit.gdshader" id="hit_shader"]
+
+[ext_resource type="PackedScene" path="res://features/target_dummy/target_status.tscn" id="status"]
+[ext_resource type="PackedScene" path="res://features/target_dummy/target_damage_numbers.tscn" id="number"]
+
+[ext_resource type="Script" path="res://features/audio/action_sound.gd" id="audio_script"]
+[ext_resource type="AudioStream" path="res://assets/audio/hit.wav" id="audio_HitSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/crit.wav" id="audio_CritSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/kill.wav" id="audio_KillSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/burn.wav" id="audio_BurnSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/poison.wav" id="audio_PoisonSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/status.wav" id="audio_StatusSound"]
+[ext_resource type="AudioStream" path="res://assets/audio/respawn.wav" id="audio_RespawnSound"]
+
+[sub_resource type="ShaderMaterial" id="HitMaterial"]
+resource_local_to_scene = true
+shader = ExtResource("hit_shader")
+shader_parameter/flash = 0.0
+
+[sub_resource type="Gradient" id="DeathFade"]
+colors = PackedColorArray(0.8, 0.9, 0.9, 1, 0.3, 0.6, 0.6, 0)
+
+[sub_resource type="ConvexPolygonShape2D" id="Body"]
+points = PackedVector2Array(0, -34, 29.445, -17, 29.445, 17, 0, 34, -29.445, 17, -29.445, -17)
+
+[node name="TargetDummy" type="CharacterBody2D"]
+motion_mode = 1
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("script")
+max_hp = 1000000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Body")
+
+[node name="ShapeVisual" parent="." instance=ExtResource("visual")]
+material = SubResource("HitMaterial")
+definition = ExtResource("shape")
+colors = ExtResource("colors")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -80.0
+offset_top = 47.0
+offset_right = 80.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.48, 0.54, 0.56, 1)
+theme_override_font_sizes/font_size = 12
+text = "TRAINING TARGET"
+horizontal_alignment = 1
+
+[node name="HealthBar" parent="." instance=ExtResource("bar")]
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+process_callback = 0
+
+[node name="DeathParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 24
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 140.0
+damping_min = 50.0
+damping_max = 80.0
+scale_amount_min = 1.2
+scale_amount_max = 3.0
+color_ramp = SubResource("DeathFade")
+
+[node name="TargetStatus" parent="." instance=ExtResource("status")]
+
+[node name="DamageNumbers" parent="." instance=ExtResource("number")]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_HitSound")
+volume_db = -17.0
+max_polyphony = 3
+bus = &"Combat"
+script = ExtResource("audio_script")
+minimum_interval = 0.09
+
+[node name="CritSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_CritSound")
+volume_db = -13.0
+max_polyphony = 3
+bus = &"Combat"
+script = ExtResource("audio_script")
+minimum_interval = 0.1
+
+[node name="KillSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_KillSound")
+volume_db = -10.0
+max_polyphony = 3
+bus = &"Combat"
+script = ExtResource("audio_script")
+minimum_interval = 0.1
+
+[node name="BurnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_BurnSound")
+volume_db = -20.0
+max_polyphony = 3
+bus = &"Effects"
+script = ExtResource("audio_script")
+minimum_interval = 0.2
+
+[node name="PoisonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_PoisonSound")
+volume_db = -17.0
+max_polyphony = 3
+bus = &"Effects"
+script = ExtResource("audio_script")
+minimum_interval = 0.2
+
+[node name="StatusSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_StatusSound")
+volume_db = -21.0
+max_polyphony = 3
+bus = &"Effects"
+script = ExtResource("audio_script")
+minimum_interval = 0.3
+
+[node name="RespawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_RespawnSound")
+volume_db = -16.0
+max_polyphony = 3
+bus = &"Effects"
+script = ExtResource("audio_script")
+minimum_interval = 0.1

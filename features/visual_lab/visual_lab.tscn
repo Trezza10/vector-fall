@@ -1,0 +1,838 @@
+[gd_scene load_steps=35 format=3]
+
+[ext_resource type="Script" path="res://features/visual_lab/visual_lab.gd" id="root"]
+[ext_resource type="PackedScene" path="res://visuals/grid/grid_background.tscn" id="grid"]
+[ext_resource type="PackedScene" path="res://features/visual_lab/shape_preview.tscn" id="preview"]
+[ext_resource type="Resource" path="res://data/palettes/deep_signal.tres" id="palette"]
+[ext_resource type="Resource" path="res://data/shapes/circle.tres" id="circle"]
+[ext_resource type="Resource" path="res://data/shapes/circle_small.tres" id="circle_small"]
+[ext_resource type="Resource" path="res://data/shapes/circle_ring.tres" id="circle_ring"]
+[ext_resource type="Resource" path="res://data/shapes/triangle.tres" id="triangle"]
+[ext_resource type="Resource" path="res://data/shapes/triangle_small.tres" id="triangle_small"]
+[ext_resource type="Resource" path="res://data/shapes/triangle_ring.tres" id="triangle_ring"]
+[ext_resource type="Resource" path="res://data/shapes/square.tres" id="square"]
+[ext_resource type="Resource" path="res://data/shapes/square_small.tres" id="square_small"]
+[ext_resource type="Resource" path="res://data/shapes/square_ring.tres" id="square_ring"]
+[ext_resource type="Resource" path="res://data/shapes/hexagon.tres" id="hexagon"]
+[ext_resource type="Resource" path="res://data/shapes/hexagon_small.tres" id="hexagon_small"]
+[ext_resource type="Resource" path="res://data/shapes/hexagon_ring.tres" id="hexagon_ring"]
+
+
+[ext_resource type="Script" path="res://features/visual_lab/playground_camera.gd" id="camera"]
+[ext_resource type="PackedScene" path="res://visuals/effects/signal_field.tscn" id="field"]
+[ext_resource type="PackedScene" path="res://visuals/effects/sparks.tscn" id="sparks"]
+[ext_resource type="Shader" path="res://visuals/effects/signal_field.gdshader" id="shader"]
+[ext_resource type="Resource" path="res://data/palettes/prism_station.tres" id="prism"]
+[ext_resource type="Resource" path="res://data/palettes/cold_terminal.tres" id="cold"]
+[ext_resource type="Resource" path="res://data/shapes/diamond.tres" id="diamond"]
+[ext_resource type="Resource" path="res://data/shapes/pentagon.tres" id="pentagon"]
+[ext_resource type="Resource" path="res://data/shapes/octagon.tres" id="octagon"]
+[ext_resource type="Resource" path="res://data/shapes/star.tres" id="star"]
+[ext_resource type="Resource" path="res://data/shapes/cross.tres" id="cross"]
+[ext_resource type="Resource" path="res://data/shapes/dart.tres" id="dart"]
+[ext_resource type="Resource" path="res://data/shapes/slug.tres" id="slug"]
+[ext_resource type="Resource" path="res://data/shapes/shard.tres" id="shard"]
+[ext_resource type="Resource" path="res://data/shapes/needle.tres" id="needle"]
+
+[sub_resource type="ShaderMaterial" id="Pulse"]
+shader = ExtResource("shader")
+shader_parameter/tint = Color(1, 0.58, 0.72, 1)
+shader_parameter/style = 1
+shader_parameter/speed = 0.8
+
+[sub_resource type="ShaderMaterial" id="Shield"]
+shader = ExtResource("shader")
+shader_parameter/tint = Color(0.7, 0.65, 1, 1)
+shader_parameter/style = 2
+shader_parameter/speed = 0.7
+
+[sub_resource type="StyleBoxFlat" id="Card"]
+bg_color = Color(0.045, 0.078, 0.098, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.13, 0.23, 0.27, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+
+[node name="VisualLab" type="Node2D"]
+script = ExtResource("root")
+palette = ExtResource("palette")
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="GridBackground" parent="Stage" instance=ExtResource("grid")]
+size = Vector2(2880, 1800)
+palette = ExtResource("palette")
+
+[node name="SampleCards" type="Node2D" parent="Stage"]
+
+[node name="Card1" type="Panel" parent="Stage/SampleCards"]
+offset_left = 64.0
+offset_top = 224.0
+offset_right = 368.0
+offset_bottom = 508.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Card2" type="Panel" parent="Stage/SampleCards"]
+offset_left = 400.0
+offset_top = 224.0
+offset_right = 704.0
+offset_bottom = 508.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Card3" type="Panel" parent="Stage/SampleCards"]
+offset_left = 736.0
+offset_top = 224.0
+offset_right = 1040.0
+offset_bottom = 508.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Card4" type="Panel" parent="Stage/SampleCards"]
+offset_left = 1072.0
+offset_top = 224.0
+offset_right = 1376.0
+offset_bottom = 508.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Gallery" type="Node2D" parent="Stage"]
+
+[node name="CirclePreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(216, 348)
+definition = ExtResource("circle")
+color_role = 0
+palette = ExtResource("palette")
+caption = "CIRCLE"
+
+[node name="CircleRingPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(216, 634)
+definition = ExtResource("circle_ring")
+color_role = 0
+palette = ExtResource("palette")
+caption = "DOUBLE INSET"
+
+[node name="CircleSmallPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(216, 768)
+definition = ExtResource("circle_small")
+color_role = 0
+palette = ExtResource("palette")
+caption = "SMALL / 26 PX"
+
+[node name="TrianglePreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(552, 348)
+definition = ExtResource("triangle")
+color_role = 1
+palette = ExtResource("palette")
+caption = "TRIANGLE"
+
+[node name="TriangleRingPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(552, 634)
+definition = ExtResource("triangle_ring")
+color_role = 1
+palette = ExtResource("palette")
+caption = "DOUBLE INSET"
+
+[node name="TriangleSmallPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(552, 768)
+definition = ExtResource("triangle_small")
+color_role = 1
+palette = ExtResource("palette")
+caption = "SMALL / 26 PX"
+
+[node name="SquarePreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(888, 348)
+definition = ExtResource("square")
+color_role = 2
+palette = ExtResource("palette")
+caption = "SQUARE"
+
+[node name="SquareRingPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(888, 634)
+definition = ExtResource("square_ring")
+color_role = 2
+palette = ExtResource("palette")
+caption = "DOUBLE INSET"
+
+[node name="SquareSmallPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(888, 768)
+definition = ExtResource("square_small")
+color_role = 2
+palette = ExtResource("palette")
+caption = "SMALL / 26 PX"
+
+[node name="HexagonPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1224, 348)
+definition = ExtResource("hexagon")
+color_role = 3
+palette = ExtResource("palette")
+caption = "HEXAGON"
+
+[node name="HexagonRingPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1224, 634)
+definition = ExtResource("hexagon_ring")
+color_role = 3
+palette = ExtResource("palette")
+caption = "DOUBLE INSET"
+
+[node name="HexagonSmallPreview" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1224, 768)
+definition = ExtResource("hexagon_small")
+color_role = 3
+palette = ExtResource("palette")
+caption = "SMALL / 26 PX"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(720, 450)
+script = ExtResource("camera")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Eyebrow" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 964.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.39608, 0.87843, 0.81176, 1)
+theme_override_font_sizes/font_size = 14
+text = "V / F     —     DESIGN SYSTEM     /     001"
+
+[node name="Title" type="Label" parent="Interface"]
+offset_left = 60.0
+offset_top = 70.0
+offset_right = 1160.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.87843, 0.92941, 0.91765, 1)
+theme_override_font_sizes/font_size = 48
+text = "Form follows signal."
+
+[node name="Subtitle" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 150.0
+offset_right = 864.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 18
+text = "VECTOR FALL   /   Visual playground"
+
+[node name="Status" type="Label" parent="Interface"]
+offset_left = 1090.0
+offset_top = 48.0
+offset_right = 1410.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0.39608, 0.87843, 0.81176, 1)
+theme_override_font_sizes/font_size = 13
+text = "VISUAL STUDIES   /   SECTOR 01"
+
+[node name="SectionOne" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 196.0
+offset_right = 564.0
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "01    SILHOUETTES"
+
+[node name="SectionTwo" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 550.0
+offset_right = 764.0
+offset_bottom = 574.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "02    INTERIOR LANGUAGE"
+
+[node name="SectionThree" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 700.0
+offset_right = 764.0
+offset_bottom = 724.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "03    SMALL-SCALE READABILITY"
+
+[node name="Footer" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 858.0
+offset_right = 1214.0
+offset_bottom = 886.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "NEXT: EAST → SILHOUETTES + PALETTES     /     SOUTH ↓ BULLETS + EFFECTS"
+
+[node name="Role0" type="Label" parent="Interface"]
+offset_left = 88.0
+offset_top = 244.0
+offset_right = 348.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.39608, 0.87843, 0.81176, 1)
+theme_override_font_sizes/font_size = 12
+text = "A / CHANNEL 01"
+
+[node name="Role1" type="Label" parent="Interface"]
+offset_left = 424.0
+offset_top = 244.0
+offset_right = 684.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.93725, 0.53333, 0.48627, 1)
+theme_override_font_sizes/font_size = 12
+text = "B / CHANNEL 02"
+
+[node name="Role2" type="Label" parent="Interface"]
+offset_left = 760.0
+offset_top = 244.0
+offset_right = 1020.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.89412, 0.73725, 0.41569, 1)
+theme_override_font_sizes/font_size = 12
+text = "C / CHANNEL 03"
+
+[node name="Role3" type="Label" parent="Interface"]
+offset_left = 1096.0
+offset_top = 244.0
+offset_right = 1356.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.67059, 0.61176, 0.87059, 1)
+theme_override_font_sizes/font_size = 12
+text = "D / CHANNEL 04"
+
+[node name="NameLabel" parent="Stage/Gallery/CircleRingPreview" index="1"]
+offset_top = 40.0
+offset_bottom = 66.0
+
+[node name="NameLabel" parent="Stage/Gallery/CircleSmallPreview" index="1"]
+offset_top = 30.0
+offset_bottom = 56.0
+
+[node name="NameLabel" parent="Stage/Gallery/TriangleRingPreview" index="1"]
+offset_top = 40.0
+offset_bottom = 66.0
+
+[node name="NameLabel" parent="Stage/Gallery/TriangleSmallPreview" index="1"]
+offset_top = 30.0
+offset_bottom = 56.0
+
+[node name="NameLabel" parent="Stage/Gallery/SquareRingPreview" index="1"]
+offset_top = 40.0
+offset_bottom = 66.0
+
+[node name="NameLabel" parent="Stage/Gallery/SquareSmallPreview" index="1"]
+offset_top = 30.0
+offset_bottom = 56.0
+
+[node name="NameLabel" parent="Stage/Gallery/HexagonRingPreview" index="1"]
+offset_top = 40.0
+offset_bottom = 66.0
+
+[node name="NameLabel" parent="Stage/Gallery/HexagonSmallPreview" index="1"]
+offset_top = 30.0
+offset_bottom = 56.0
+
+[node name="EastTitle" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 65.0
+offset_right = 2804.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.87843, 0.92941, 0.91765, 1)
+theme_override_font_sizes/font_size = 38
+text = "02 / SHAPE LIBRARY"
+
+[node name="EastSubtitle" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 135.0
+offset_right = 2804.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Additional silhouettes • shared geometry renderer • editable presets"
+
+[node name="DiamondStudy" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1592, 325)
+definition = ExtResource("diamond")
+color_role = 0
+palette = ExtResource("palette")
+palette_override = false
+caption = "DIAMONDSTUDY"
+
+[node name="PentagonStudy" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1832, 325)
+definition = ExtResource("pentagon")
+color_role = 1
+palette = ExtResource("palette")
+palette_override = false
+caption = "PENTAGONSTUDY"
+
+[node name="OctagonStudy" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2072, 325)
+definition = ExtResource("octagon")
+color_role = 2
+palette = ExtResource("palette")
+palette_override = false
+caption = "OCTAGONSTUDY"
+
+[node name="StarStudy" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2312, 325)
+definition = ExtResource("star")
+color_role = 3
+palette = ExtResource("palette")
+palette_override = false
+caption = "STARSTUDY"
+
+[node name="CrossStudy" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2552, 325)
+definition = ExtResource("cross")
+color_role = 0
+palette = ExtResource("palette")
+palette_override = false
+caption = "CROSSSTUDY"
+
+[node name="PaletteTitle" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 475.0
+offset_right = 2804.0
+offset_bottom = 540.0
+theme_override_colors/font_color = Color(0.39608, 0.87843, 0.81176, 1)
+theme_override_font_sizes/font_size = 18
+text = "PALETTE COMPARISON / SAME GEOMETRY"
+
+[node name="PaletteLabel0" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 560.0
+offset_right = 2804.0
+offset_bottom = 625.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "DEEP SIGNAL"
+
+[node name="Palette0Role0" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1880, 575)
+definition = ExtResource("diamond")
+color_role = 0
+palette = ExtResource("palette")
+palette_override = false
+caption = "PALETTE0ROLE0"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette0Role0" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette0Role0" index="1"]
+visible = false
+
+[node name="Palette0Role1" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2125, 575)
+definition = ExtResource("diamond")
+color_role = 1
+palette = ExtResource("palette")
+palette_override = false
+caption = "PALETTE0ROLE1"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette0Role1" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette0Role1" index="1"]
+visible = false
+
+[node name="Palette0Role2" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2370, 575)
+definition = ExtResource("diamond")
+color_role = 2
+palette = ExtResource("palette")
+palette_override = false
+caption = "PALETTE0ROLE2"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette0Role2" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette0Role2" index="1"]
+visible = false
+
+[node name="Palette0Role3" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2615, 575)
+definition = ExtResource("diamond")
+color_role = 3
+palette = ExtResource("palette")
+palette_override = false
+caption = "PALETTE0ROLE3"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette0Role3" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette0Role3" index="1"]
+visible = false
+
+[node name="PaletteLabel1" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 675.0
+offset_right = 2804.0
+offset_bottom = 740.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "COLD TERMINAL"
+
+[node name="Palette1Role0" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1880, 690)
+definition = ExtResource("diamond")
+color_role = 0
+palette = ExtResource("cold")
+palette_override = true
+caption = "PALETTE1ROLE0"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette1Role0" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette1Role0" index="1"]
+visible = false
+
+[node name="Palette1Role1" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2125, 690)
+definition = ExtResource("diamond")
+color_role = 1
+palette = ExtResource("cold")
+palette_override = true
+caption = "PALETTE1ROLE1"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette1Role1" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette1Role1" index="1"]
+visible = false
+
+[node name="Palette1Role2" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2370, 690)
+definition = ExtResource("diamond")
+color_role = 2
+palette = ExtResource("cold")
+palette_override = true
+caption = "PALETTE1ROLE2"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette1Role2" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette1Role2" index="1"]
+visible = false
+
+[node name="Palette1Role3" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2615, 690)
+definition = ExtResource("diamond")
+color_role = 3
+palette = ExtResource("cold")
+palette_override = true
+caption = "PALETTE1ROLE3"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette1Role3" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette1Role3" index="1"]
+visible = false
+
+[node name="PaletteLabel2" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 790.0
+offset_right = 2804.0
+offset_bottom = 855.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "PRISM STATION"
+
+[node name="Palette2Role0" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1880, 805)
+definition = ExtResource("diamond")
+color_role = 0
+palette = ExtResource("prism")
+palette_override = true
+caption = "PALETTE2ROLE0"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette2Role0" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette2Role0" index="1"]
+visible = false
+
+[node name="Palette2Role1" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2125, 805)
+definition = ExtResource("diamond")
+color_role = 1
+palette = ExtResource("prism")
+palette_override = true
+caption = "PALETTE2ROLE1"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette2Role1" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette2Role1" index="1"]
+visible = false
+
+[node name="Palette2Role2" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2370, 805)
+definition = ExtResource("diamond")
+color_role = 2
+palette = ExtResource("prism")
+palette_override = true
+caption = "PALETTE2ROLE2"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette2Role2" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette2Role2" index="1"]
+visible = false
+
+[node name="Palette2Role3" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(2615, 805)
+definition = ExtResource("diamond")
+color_role = 3
+palette = ExtResource("prism")
+palette_override = true
+caption = "PALETTE2ROLE3"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Palette2Role3" index="0"]
+scale = Vector2(0.45, 0.45)
+
+[node name="NameLabel" parent="Stage/Gallery/Palette2Role3" index="1"]
+visible = false
+
+[node name="BulletTitle" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 955.0
+offset_right = 1364.0
+offset_bottom = 1020.0
+theme_override_colors/font_color = Color(0.87843, 0.92941, 0.91765, 1)
+theme_override_font_sizes/font_size = 38
+text = "03 / PROJECTILE LANGUAGE"
+
+[node name="BulletSubtitle" type="Label" parent="Interface"]
+offset_left = 64.0
+offset_top = 1025.0
+offset_right = 1364.0
+offset_bottom = 1090.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Static visual samples • no firing, damage or collision • mix silhouette + proportion + color"
+
+[node name="Dart" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(216, 1180)
+definition = ExtResource("dart")
+color_role = 0
+palette = ExtResource("prism")
+palette_override = true
+caption = "DART"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Dart" index="0"]
+scale = Vector2(0.7, 1.6)
+
+[node name="Slug" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(552, 1180)
+definition = ExtResource("slug")
+color_role = 1
+palette = ExtResource("prism")
+palette_override = true
+caption = "SLUG"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Slug" index="0"]
+scale = Vector2(0.65, 1.55)
+
+[node name="Shard" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(888, 1180)
+definition = ExtResource("shard")
+color_role = 2
+palette = ExtResource("prism")
+palette_override = true
+caption = "SHARD"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Shard" index="0"]
+scale = Vector2(0.6, 1.7)
+
+[node name="Needle" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1224, 1180)
+definition = ExtResource("needle")
+color_role = 3
+palette = ExtResource("prism")
+palette_override = true
+caption = "NEEDLE"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Needle" index="0"]
+scale = Vector2(0.22, 2.0)
+
+[node name="HeavyDart" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(216, 1480)
+definition = ExtResource("dart")
+color_role = 0
+palette = ExtResource("prism")
+palette_override = true
+caption = "HEAVYDART"
+
+[node name="ShapeVisual" parent="Stage/Gallery/HeavyDart" index="0"]
+scale = Vector2(1.2, 1.8)
+
+[node name="Orb" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(552, 1480)
+definition = ExtResource("circle_ring")
+color_role = 1
+palette = ExtResource("prism")
+palette_override = true
+caption = "ORB"
+
+[node name="ShapeVisual" parent="Stage/Gallery/Orb" index="0"]
+scale = Vector2(0.7, 0.7)
+
+[node name="StarBolt" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(888, 1480)
+definition = ExtResource("star")
+color_role = 2
+palette = ExtResource("prism")
+palette_override = true
+caption = "STARBOLT"
+
+[node name="ShapeVisual" parent="Stage/Gallery/StarBolt" index="0"]
+scale = Vector2(0.5, 0.5)
+
+[node name="CrossBolt" parent="Stage/Gallery" instance=ExtResource("preview")]
+position = Vector2(1224, 1480)
+definition = ExtResource("cross")
+color_role = 3
+palette = ExtResource("prism")
+palette_override = true
+caption = "CROSSBOLT"
+
+[node name="ShapeVisual" parent="Stage/Gallery/CrossBolt" index="0"]
+scale = Vector2(0.5, 0.5)
+
+[node name="EffectsTitle" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 955.0
+offset_right = 2804.0
+offset_bottom = 1020.0
+theme_override_colors/font_color = Color(0.87843, 0.92941, 0.91765, 1)
+theme_override_font_sizes/font_size = 38
+text = "04 / SIGNAL + MATTER"
+
+[node name="EffectsSubtitle" type="Label" parent="Interface"]
+offset_left = 1504.0
+offset_top = 1025.0
+offset_right = 2804.0
+offset_bottom = 1090.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Animated shader fields and CPU particles • tune materials and emitters in the Inspector"
+
+[node name="CoreField" parent="Stage" instance=ExtResource("field")]
+position = Vector2(1700, 1190)
+
+[node name="CoreCaption" type="Label" parent="Interface"]
+offset_left = 1555.0
+offset_top = 1320.0
+offset_right = 2855.0
+offset_bottom = 1385.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "ION CORE / SHADER"
+
+[node name="PulseField" parent="Stage" instance=ExtResource("field")]
+position = Vector2(2140, 1190)
+
+[node name="Field" parent="Stage/PulseField" index="0"]
+material = SubResource("Pulse")
+
+[node name="PulseCaption" type="Label" parent="Interface"]
+offset_left = 1995.0
+offset_top = 1320.0
+offset_right = 3295.0
+offset_bottom = 1385.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "EXPANDING PULSE / SHADER"
+
+[node name="ShieldField" parent="Stage" instance=ExtResource("field")]
+position = Vector2(2580, 1190)
+
+[node name="Field" parent="Stage/ShieldField" index="0"]
+material = SubResource("Shield")
+
+[node name="ShieldCaption" type="Label" parent="Interface"]
+offset_left = 2435.0
+offset_top = 1320.0
+offset_right = 3735.0
+offset_bottom = 1385.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "SCANNING SHIELD / SHADER"
+
+[node name="IonSparks" parent="Stage" instance=ExtResource("sparks")]
+position = Vector2(1700, 1510)
+
+[node name="IonSparksCaption" type="Label" parent="Interface"]
+offset_left = 1555.0
+offset_top = 1650.0
+offset_right = 2855.0
+offset_bottom = 1715.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "ION SPARKS / PARTICLES"
+
+[node name="EmberFountain" parent="Stage" instance=ExtResource("sparks")]
+position = Vector2(2140, 1510)
+spread = 30.0
+gravity = Vector2(0, 70)
+initial_velocity_min = 65.0
+initial_velocity_max = 120.0
+modulate = Color(1, 0.55, 0.3, 1)
+
+[node name="EmberFountainCaption" type="Label" parent="Interface"]
+offset_left = 1995.0
+offset_top = 1650.0
+offset_right = 3295.0
+offset_bottom = 1715.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "EMBER FOUNTAIN / PARTICLES"
+
+[node name="DustCloud" parent="Stage" instance=ExtResource("sparks")]
+position = Vector2(2580, 1510)
+amount = 60
+emission_sphere_radius = 65.0
+initial_velocity_min = 2.0
+initial_velocity_max = 8.0
+damping_min = 0.0
+damping_max = 1.0
+modulate = Color(0.7, 0.6, 1, 0.55)
+
+[node name="DustCloudCaption" type="Label" parent="Interface"]
+offset_left = 2435.0
+offset_top = 1650.0
+offset_right = 3735.0
+offset_bottom = 1715.0
+theme_override_colors/font_color = Color(0.54902, 0.64706, 0.68235, 1)
+theme_override_font_sizes/font_size = 13
+text = "DRIFT DUST / PARTICLES"
+
+[node name="Navigation" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Help" type="Label" parent="CanvasLayer/Navigation"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "WASD / ARROWS   Pan     •     SHIFT   Faster     •     R   Home     •     F11   Fullscreen     •     ESC   Windowed     |     EAST: Shapes + palettes     SOUTH: Bullets     SOUTHEAST: Effects"
+horizontal_alignment = 1

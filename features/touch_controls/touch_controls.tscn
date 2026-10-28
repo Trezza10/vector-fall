@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=3]
+[ext_resource type="Script" path="res://features/touch_controls/touch_controls.gd" id="script"]
+[ext_resource type="Script" path="res://features/touch_controls/touch_stick.gd" id="stick"]
+[ext_resource type="Texture2D" path="res://features/touch_controls/touch_button.svg" id="button"]
+[sub_resource type="StyleBoxFlat" id="Base"]
+bg_color = Color(0.03, 0.12, 0.15, 0.55)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.8, 0.75, 0.7)
+corner_radius_top_left = 112
+corner_radius_top_right = 112
+corner_radius_bottom_left = 112
+corner_radius_bottom_right = 112
+[sub_resource type="StyleBoxFlat" id="Thumb"]
+bg_color = Color(0.4, 0.9, 0.75, 0.5)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_left = 28
+corner_radius_bottom_right = 28
+[sub_resource type="RectangleShape2D" id="ButtonShape"]
+size = Vector2(140, 90)
+[node name="TouchControls" type="CanvasLayer"]
+process_mode = 3
+layer = 9
+script = ExtResource("script")
+[node name="MoveStick" type="Control" parent="."]
+anchor_left = 0.0
+anchor_right = 0.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -382.0
+offset_right = 272.0
+offset_bottom = -158.0
+mouse_filter = 2
+script = ExtResource("stick")
+[node name="Base" type="Panel" parent="MoveStick"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Base")
+[node name="Thumb" type="Panel" parent="MoveStick"]
+offset_left = 84.0
+offset_top = 84.0
+offset_right = 140.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Thumb")
+[node name="Label" type="Label" parent="MoveStick"]
+offset_top = 228.0
+offset_right = 224.0
+offset_bottom = 260.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+text = "MOVE"
+[node name="AimStick" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -292.0
+offset_top = -382.0
+offset_right = -68.0
+offset_bottom = -158.0
+mouse_filter = 2
+script = ExtResource("stick")
+[node name="Base" type="Panel" parent="AimStick"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Base")
+[node name="Thumb" type="Panel" parent="AimStick"]
+offset_left = 84.0
+offset_top = 84.0
+offset_right = 140.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Thumb")
+[node name="Label" type="Label" parent="AimStick"]
+offset_top = 228.0
+offset_right = 224.0
+offset_bottom = 260.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+text = "AIM"
+[node name="Dash" type="TouchScreenButton" parent="."]
+texture_normal = ExtResource("button")
+shape = SubResource("ButtonShape")
+[node name="Label" type="Label" parent="Dash"]
+offset_right = 140.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "DASH"
+[node name="Pause" type="TouchScreenButton" parent="."]
+texture_normal = ExtResource("button")
+shape = SubResource("ButtonShape")
+[node name="Label" type="Label" parent="Pause"]
+offset_right = 140.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "PAUSE"
+[node name="Reset" type="TouchScreenButton" parent="."]
+texture_normal = ExtResource("button")
+shape = SubResource("ButtonShape")
+[node name="Label" type="Label" parent="Reset"]
+offset_right = 140.0
+offset_bottom = 90.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "RESET"

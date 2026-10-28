@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="PackedScene" path="res://features/enemies/enemy_base.tscn" id="base"]
+[ext_resource type="Resource" path="res://data/enemies/charger.tres" id="definition"]
+[ext_resource type="Resource" path="res://data/shapes/enemy_charger.tres" id="shape"]
+[ext_resource type="Resource" path="res://data/palettes/enemy_charger.tres" id="colors"]
+[sub_resource type="CircleShape2D" id="Body"]
+radius = 24.0
+[node name="Lancer" instance=ExtResource("base")]
+definition = ExtResource("definition")
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("Body")
+[node name="ShapeVisual" parent="." index="1"]
+definition = ExtResource("shape")
+colors = ExtResource("colors")
+[node name="Label" parent="." index="2"]
+offset_top = 36.0
+offset_bottom = 61.0
+text = "LANCER"
+[node name="HealthBar" parent="." index="3"]
+scale = Vector2(1.0, 1.0)

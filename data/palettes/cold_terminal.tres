@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="PaletteDefinition" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://visuals/shapes/palette_definition.gd" id="1"]
+[ext_resource type="Script" path="res://visuals/shapes/shape_colors.gd" id="2"]
+
+[sub_resource type="Resource" id="Colors_0"]
+script = ExtResource("2")
+fill = Color(0.12549, 0.21176, 0.30588, 1)
+outline = Color(0.5451, 0.78824, 0.96078, 1)
+detail = Color(0.29412, 0.4902, 0.61961, 1)
+highlight = Color(0.83137, 0.94118, 1.0, 1)
+
+[sub_resource type="Resource" id="Colors_1"]
+script = ExtResource("2")
+fill = Color(0.24314, 0.16078, 0.26275, 1)
+outline = Color(0.86667, 0.62353, 0.78824, 1)
+detail = Color(0.55686, 0.37647, 0.54118, 1)
+highlight = Color(1.0, 0.87843, 0.94118, 1)
+
+[sub_resource type="Resource" id="Colors_2"]
+script = ExtResource("2")
+fill = Color(0.13725, 0.23922, 0.23137, 1)
+outline = Color(0.56078, 0.81569, 0.67451, 1)
+detail = Color(0.34118, 0.54902, 0.46275, 1)
+highlight = Color(0.86275, 1.0, 0.89804, 1)
+
+[sub_resource type="Resource" id="Colors_3"]
+script = ExtResource("2")
+fill = Color(0.25882, 0.21176, 0.17255, 1)
+outline = Color(0.85098, 0.67843, 0.53725, 1)
+detail = Color(0.56078, 0.42745, 0.31373, 1)
+highlight = Color(1.0, 0.8902, 0.77255, 1)
+
+[resource]
+script = ExtResource("1")
+background = Color(0.06275, 0.07843, 0.12157, 1)
+grid = Color(0.12549, 0.15294, 0.21569, 1)
+player = SubResource("Colors_0")
+enemy_common = SubResource("Colors_1")
+enemy_fast = SubResource("Colors_2")
+enemy_heavy = SubResource("Colors_3")

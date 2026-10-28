@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponModification" load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/pickups/weapon_modification.gd" id="mod"]
+[ext_resource type="Script" path="res://visuals/shapes/shape_colors.gd" id="colors"]
+[sub_resource type="Resource" id="Colors"]
+script = ExtResource("colors")
+fill = Color(0.055, 0.12, 0.15, 1)
+outline = Color(0.73, 0.64, 1, 1)
+detail = Color(0.73, 0.64, 1, 0.4)
+highlight = Color(0.85, 1, 0.97, 1)
+[resource]
+script = ExtResource("mod")
+id = &"piercing"
+display_name = "Piercing"
+description = "+1 penetration"
+duration_seconds = 0.0
+colors = SubResource("Colors")
+pierce_bonus = 1

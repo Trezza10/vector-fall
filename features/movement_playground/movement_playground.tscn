@@ -1,0 +1,454 @@
+[gd_scene load_steps=33 format=3]
+
+[ext_resource type="Script" path="res://features/movement_playground/movement_playground.gd" id="root"]
+[ext_resource type="PackedScene" path="res://features/player/player.tscn" id="player"]
+[ext_resource type="PackedScene" path="res://visuals/grid/grid_background.tscn" id="grid"]
+[ext_resource type="Resource" path="res://data/palettes/deep_signal.tres" id="palette"]
+
+[ext_resource type="PackedScene" path="res://features/pause_menu/pause_menu.tscn" id="pause"]
+[ext_resource type="PackedScene" path="res://features/target_dummy/target_dummy.tscn" id="dummy"]
+
+[ext_resource type="PackedScene" path="res://features/pickups/upgrade_pickup.tscn" id="pickup"]
+[ext_resource type="Resource" path="res://data/modifications/multishot.tres" id="mod_multishot"]
+[ext_resource type="Resource" path="res://data/modifications/rapid_fire.tres" id="mod_rapid_fire"]
+[ext_resource type="Resource" path="res://data/modifications/piercing.tres" id="mod_piercing"]
+[ext_resource type="Resource" path="res://data/modifications/damage.tres" id="mod_damage"]
+[ext_resource type="Resource" path="res://data/modifications/velocity.tres" id="mod_velocity"]
+
+[ext_resource type="Resource" path="res://data/modifications/burn.tres" id="mod_burn"]
+[ext_resource type="Resource" path="res://data/modifications/poison.tres" id="mod_poison"]
+[ext_resource type="Resource" path="res://data/modifications/ice.tres" id="mod_ice"]
+[ext_resource type="Resource" path="res://data/modifications/stun.tres" id="mod_stun"]
+[ext_resource type="Resource" path="res://data/modifications/knockback.tres" id="mod_knockback"]
+[ext_resource type="Resource" path="res://data/modifications/mark.tres" id="mod_mark"]
+
+[ext_resource type="Resource" path="res://data/modifications/crit_chance.tres" id="mod_crit"]
+
+[ext_resource type="Resource" path="res://data/modifications/dash_charge.tres" id="mod_dash_charge"]
+[ext_resource type="Resource" path="res://data/modifications/dash_cooldown.tres" id="mod_dash_cooldown"]
+
+[ext_resource type="PackedScene" path="res://features/enemies/enemy_field.tscn" id="enemy_field"]
+
+[ext_resource type="PackedScene" path="res://features/target_dummy/damage_health_bar.tscn" id="player_health"]
+
+[ext_resource type="PackedScene" path="res://visuals/effects/player_damage_feedback.tscn" id="damage_feedback"]
+[ext_resource type="PackedScene" path="res://features/pickups/healing_pickup.tscn" id="healing_pickup"]
+
+[ext_resource type="PackedScene" path="res://features/touch_controls/touch_controls.tscn" id="touch"]
+
+[sub_resource type="RectangleShape2D" id="HorizontalWall"]
+size = Vector2(2400, 32)
+
+[sub_resource type="StyleBoxFlat" id="DashTrack"]
+bg_color = Color(0.05, 0.13, 0.16, 1)
+
+[sub_resource type="StyleBoxFlat" id="DashFill"]
+bg_color = Color(0.4, 0.88, 0.81, 1)
+
+[sub_resource type="RectangleShape2D" id="VerticalWall"]
+size = Vector2(32, 1600)
+
+[sub_resource type="RectangleShape2D" id="Block"]
+size = Vector2(160, 160)
+
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.035, 0.07, 0.09, 0.94)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.36, 0.39, 1)
+content_margin_left = 24.0
+content_margin_right = 24.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[node name="MovementPlayground" type="Node2D"]
+script = ExtResource("root")
+
+[node name="GridBackground" parent="." instance=ExtResource("grid")]
+size = Vector2(2400, 1600)
+palette = ExtResource("palette")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="North" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1200, 0)
+shape = SubResource("HorizontalWall")
+
+[node name="NorthVisual" type="Polygon2D" parent="Walls"]
+position = Vector2(1200, 0)
+polygon = PackedVector2Array(-1200.0, -16.0, 1200.0, -16.0, 1200.0, 16.0, -1200.0, 16.0)
+color = Color(0.12, 0.25, 0.28, 1)
+
+[node name="South" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1200, 1600)
+shape = SubResource("HorizontalWall")
+
+[node name="SouthVisual" type="Polygon2D" parent="Walls"]
+position = Vector2(1200, 1600)
+polygon = PackedVector2Array(-1200.0, -16.0, 1200.0, -16.0, 1200.0, 16.0, -1200.0, 16.0)
+color = Color(0.12, 0.25, 0.28, 1)
+
+[node name="West" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 800)
+shape = SubResource("VerticalWall")
+
+[node name="WestVisual" type="Polygon2D" parent="Walls"]
+position = Vector2(0, 800)
+polygon = PackedVector2Array(-16.0, -800.0, 16.0, -800.0, 16.0, 800.0, -16.0, 800.0)
+color = Color(0.12, 0.25, 0.28, 1)
+
+[node name="East" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2400, 800)
+shape = SubResource("VerticalWall")
+
+[node name="EastVisual" type="Polygon2D" parent="Walls"]
+position = Vector2(2400, 800)
+polygon = PackedVector2Array(-16.0, -800.0, 16.0, -800.0, 16.0, 800.0, -16.0, 800.0)
+color = Color(0.12, 0.25, 0.28, 1)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Block1" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(740, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block1"]
+shape = SubResource("Block")
+
+[node name="Surface" type="Polygon2D" parent="Obstacles/Block1"]
+polygon = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+color = Color(0.08, 0.16, 0.19, 1)
+
+[node name="Outline" type="Line2D" parent="Obstacles/Block1"]
+points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80, -80, -80)
+width = 2.0
+default_color = Color(0.23, 0.42, 0.45, 1)
+
+[node name="Block2" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(1660, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block2"]
+shape = SubResource("Block")
+
+[node name="Surface" type="Polygon2D" parent="Obstacles/Block2"]
+polygon = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+color = Color(0.08, 0.16, 0.19, 1)
+
+[node name="Outline" type="Line2D" parent="Obstacles/Block2"]
+points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80, -80, -80)
+width = 2.0
+default_color = Color(0.23, 0.42, 0.45, 1)
+
+[node name="Block3" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(740, 1100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block3"]
+shape = SubResource("Block")
+
+[node name="Surface" type="Polygon2D" parent="Obstacles/Block3"]
+polygon = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+color = Color(0.08, 0.16, 0.19, 1)
+
+[node name="Outline" type="Line2D" parent="Obstacles/Block3"]
+points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80, -80, -80)
+width = 2.0
+default_color = Color(0.23, 0.42, 0.45, 1)
+
+[node name="Block4" type="StaticBody2D" parent="Obstacles"]
+position = Vector2(1660, 1100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Block4"]
+shape = SubResource("Block")
+
+[node name="Surface" type="Polygon2D" parent="Obstacles/Block4"]
+polygon = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
+color = Color(0.08, 0.16, 0.19, 1)
+
+[node name="Outline" type="Line2D" parent="Obstacles/Block4"]
+points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80, -80, -80)
+width = 2.0
+default_color = Color(0.23, 0.42, 0.45, 1)
+
+[node name="SpawnMarker" type="Line2D" parent="."]
+position = Vector2(1200, 800)
+points = PackedVector2Array(-60, -12, -60, -60, -12, -60)
+width = 2.0
+default_color = Color(0.2, 0.38, 0.4, 1)
+
+[node name="SpawnMarkerOpposite" type="Line2D" parent="."]
+position = Vector2(1200, 800)
+points = PackedVector2Array(60, 12, 60, 60, 12, 60)
+width = 2.0
+default_color = Color(0.2, 0.38, 0.4, 1)
+
+[node name="TargetDummies" type="Node2D" parent="."]
+
+[node name="DummyLeft" parent="TargetDummies" instance=ExtResource("dummy")]
+position = Vector2(980, 600)
+
+[node name="DummyCenter" parent="TargetDummies" instance=ExtResource("dummy")]
+position = Vector2(1200, 520)
+
+[node name="DummyRight" parent="TargetDummies" instance=ExtResource("dummy")]
+position = Vector2(1420, 600)
+
+
+[node name="LiveTargets" type="Node2D" parent="."]
+
+[node name="LiveLeft" parent="LiveTargets" instance=ExtResource("dummy")]
+position = Vector2(1000, 1000)
+max_hp = 20
+respawn_on_death = true
+respawn_delay = 5.0
+display_label = "RESPAWNING TARGET"
+
+[node name="LiveCenter" parent="LiveTargets" instance=ExtResource("dummy")]
+position = Vector2(1200, 1110)
+max_hp = 20
+respawn_on_death = true
+respawn_delay = 5.0
+display_label = "RESPAWNING TARGET"
+
+[node name="LiveRight" parent="LiveTargets" instance=ExtResource("dummy")]
+position = Vector2(1400, 1000)
+max_hp = 20
+respawn_on_death = true
+respawn_delay = 5.0
+display_label = "RESPAWNING TARGET"
+
+
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="MultishotA" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(950, 800)
+modification = ExtResource("mod_multishot")
+
+[node name="MultishotB" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(900, 1040)
+modification = ExtResource("mod_multishot")
+
+[node name="RapidFireA" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1450, 800)
+modification = ExtResource("mod_rapid_fire")
+
+[node name="RapidFireB" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1500, 1040)
+modification = ExtResource("mod_rapid_fire")
+
+[node name="PiercingA" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(880, 690)
+modification = ExtResource("mod_piercing")
+
+[node name="PiercingB" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1520, 690)
+modification = ExtResource("mod_piercing")
+
+[node name="ImpactA" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1080, 660)
+modification = ExtResource("mod_damage")
+
+[node name="ImpactB" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1320, 660)
+modification = ExtResource("mod_damage")
+
+[node name="Velocity" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1200, 950)
+modification = ExtResource("mod_velocity")
+
+
+[node name="Burn" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1800, 760)
+modification = ExtResource("mod_burn")
+
+[node name="Poison" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(2020, 760)
+modification = ExtResource("mod_poison")
+
+[node name="Ice" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(2240, 760)
+modification = ExtResource("mod_ice")
+
+[node name="Stun" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1800, 1000)
+modification = ExtResource("mod_stun")
+
+[node name="Knockback" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(2020, 1000)
+modification = ExtResource("mod_knockback")
+
+[node name="Mark" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(2240, 1000)
+modification = ExtResource("mod_mark")
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("player")]
+position = Vector2(1200, 800)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+limit_left = 0
+limit_top = 0
+limit_right = 2400
+limit_bottom = 1600
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Header" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 470.0
+offset_bottom = 118.0
+theme_override_styles/panel = SubResource("Panel")
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.9, 0.84, 1)
+theme_override_font_sizes/font_size = 19
+text = "VECTOR FALL / MOVEMENT LAB
+Accelerate. Turn. Release. Find the feel."
+
+[node name="Help" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("Panel")
+mouse_filter = 2
+
+[node name="Controls" type="Label" parent="CanvasLayer/Help"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.82, 0.83, 1)
+theme_override_font_sizes/font_size = 15
+text = "WASD / ARROWS / LEFT STICK   Move   |   R   Reset   |   F11   Fullscreen   |   ESC / START   Pause"
+horizontal_alignment = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("pause")]
+
+[node name="DashMeter" type="ProgressBar" parent="CanvasLayer"]
+theme_override_styles/background = SubResource("DashTrack")
+theme_override_styles/fill = SubResource("DashFill")
+offset_left = 24.0
+offset_top = 132.0
+offset_right = 270.0
+offset_bottom = 140.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+mouse_filter = 2
+
+[node name="DashHint" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 148.0
+offset_right = 400.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0.4, 0.88, 0.81, 1)
+theme_override_font_sizes/font_size = 14
+text = "SPACE / RB   Dash   |   Recharge"
+
+[node name="ArsenalLabel" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 190.0
+offset_right = 850.0
+offset_bottom = 240.0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.62, 0.77, 0.78, 1)
+text = "ARSENAL"
+
+[node name="ModifierPanel" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -390.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 134.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Panel")
+[node name="Content" type="VBoxContainer" parent="CanvasLayer/ModifierPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+mouse_filter = 2
+[node name="Title" type="Label" parent="CanvasLayer/ModifierPanel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.4, 0.88, 0.81, 1)
+text = "MODIFICATIONS / STACKS"
+[node name="Stacks" type="Label" parent="CanvasLayer/ModifierPanel/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.7, 0.8, 0.82, 1)
+text = "Walk over a glowing pickup."
+
+[node name="EffectsSign" type="Label" parent="."]
+offset_left = 1780.0
+offset_top = 630.0
+offset_right = 2370.0
+offset_bottom = 690.0
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.55, 0.82, 0.84, 1)
+text = "ON-HIT EFFECTS / STACK + COMBINE"
+
+[node name="CritChanceA" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1080, 850)
+modification = ExtResource("mod_crit")
+
+[node name="CritChanceB" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1320, 850)
+modification = ExtResource("mod_crit")
+
+[node name="DashReserve" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1080, 740)
+modification = ExtResource("mod_dash_charge")
+
+[node name="QuickDash" parent="Pickups" instance=ExtResource("pickup")]
+position = Vector2(1320, 740)
+modification = ExtResource("mod_dash_cooldown")
+
+[node name="EnemyProjectiles" type="Node2D" parent="."]
+[node name="EnemyField" parent="." instance=ExtResource("enemy_field")]
+[node name="EnemyHint" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 245.0
+offset_right = 600.0
+offset_bottom = 277.0
+theme_override_colors/font_color = Color(1, 0.6, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "< HOSTILE FIELD   /   Hits: 0   /   R resets"
+
+[node name="PlayerHealth" parent="CanvasLayer" instance=ExtResource("player_health")]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -118.0
+offset_right = 304.0
+offset_bottom = -94.0
+show_maximum = true
+value_prefix = "PLAYER  "
+animate_healing = true
+
+[node name="PlayerHealthHint" type="Label" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -86.0
+offset_right = 430.0
+offset_bottom = -62.0
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.6, 0.8, 0.78, 1)
+text = "R restores health and resets the encounter"
+
+[node name="PlayerDamageFeedback" parent="." instance=ExtResource("damage_feedback")]
+[node name="RepairEntrance" parent="Pickups" instance=ExtResource("healing_pickup")]
+position = Vector2(720, 800)
+[node name="RepairField" parent="Pickups" instance=ExtResource("healing_pickup")]
+position = Vector2(400, 1180)
+
+[node name="TouchControls" parent="." instance=ExtResource("touch")]
