@@ -90,8 +90,10 @@ Start at the central test hub and follow the floor signs:
 - **04 / Southeast — Status Effects:** burn, poison, ice, stun, knockback and mark.
 - **05 / West — Live Enemies:** eight named stations with permanent behavior descriptions. Approach to engage.
 
-Green repair pickups sit at the hub and the hostile-field exit. Floor zones, guides, pickups, targets, obstacles and enemy stations are all authored in the scene editor. The campus is 7200 x 4600 world units; camera/world bounds match its walls.
+Green repair pickups sit at the hub and the hostile-field exit. Floor zones, guides, pickups, targets, obstacles and enemy stations are all authored in the scene editor. The campus is 7200 x 6400 world units; camera/world bounds match its walls.
 
 **06 / Far east — Advanced Hazards:** six spacious bays beyond the original upgrade/effects areas. Mire Lobber throws a marked arc volley that lands in poison pools; Disruptor shoots stun bolts; Repulsor pushes with cyan rounds; Cinder Runner dashes through a burning trail; Prism Lancer locks a warning line before firing a laser. Linked Colossus shoots large, slow, long-range rounds and is immune until its remote 40-HP Life Link in the south is destroyed. The magenta beam points to the link. Resetting the encounter or the Colossus respawning restores the link.
 
 Player poison/burn, stun and knockback reuse the same damage feedback and grace rules as other hits. Status tint appears on the player; no extra mobile HUD is added. Ground hazards and statuses pause with gameplay and clear on a run reset. World health bars are positioned from their actual scaled width and enemy radius so future archetypes remain centered.
+
+**07 / South — Environmental Obstacles:** continue south past Movement + Dash. Static spike beds always hurt; hidden pressure spikes warn before rising and rearm after a cooldown. Cyan pulse tiles briefly stun during their live phase. The laser crossing alternates thin warning, active beam and a green safe cooldown. Solid cover blocks stop both movement and player/hostile projectiles. A repair pickup sits at the entrance. Each station is spacious and labeled, with all fixed instances/colliders/visuals authored in scenes. Hazard damage/timings/effects are Inspector properties. Pause freezes hazard phases; playground reset restores the initial patterns.

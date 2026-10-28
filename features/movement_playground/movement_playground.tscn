@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3]
+[gd_scene load_steps=35 format=3]
 
 [ext_resource type="Script" path="res://features/movement_playground/movement_playground.gd" id="root"]
 [ext_resource type="PackedScene" path="res://features/player/player.tscn" id="player"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" path="res://features/touch_controls/touch_controls.tscn" id="touch"]
 
 [ext_resource type="PackedScene" path="res://features/enemies/advanced_field.tscn" id="advanced_field"]
+[ext_resource type="PackedScene" path="res://features/environment/environment_field.tscn" id="environment"]
 [sub_resource type="RectangleShape2D" id="HorizontalWall"]
 size = Vector2(7200, 32)
 
@@ -47,7 +48,7 @@ bg_color = Color(0.05, 0.13, 0.16, 1)
 bg_color = Color(0.4, 0.88, 0.81, 1)
 
 [sub_resource type="RectangleShape2D" id="VerticalWall"]
-size = Vector2(32, 4600)
+size = Vector2(32, 6400)
 
 [sub_resource type="RectangleShape2D" id="Block"]
 size = Vector2(160, 160)
@@ -67,7 +68,7 @@ script = ExtResource("root")
 
 [node name="GridBackground" parent="." instance=ExtResource("grid")]
 z_index = -10
-size = Vector2(7200, 4600)
+size = Vector2(7200, 6400)
 palette = ExtResource("palette")
 
 [node name="Walls" type="StaticBody2D" parent="."]
@@ -82,30 +83,30 @@ polygon = PackedVector2Array(-3600, -16, 3600, -16, 3600, 16, -3600, 16)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="South" type="CollisionShape2D" parent="Walls"]
-position = Vector2(3600, 4600)
+position = Vector2(3600, 6400)
 shape = SubResource("HorizontalWall")
 
 [node name="SouthVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(3600, 4600)
+position = Vector2(3600, 6400)
 polygon = PackedVector2Array(-3600, -16, 3600, -16, 3600, 16, -3600, 16)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="West" type="CollisionShape2D" parent="Walls"]
-position = Vector2(0, 2300)
+position = Vector2(0, 3200)
 shape = SubResource("VerticalWall")
 
 [node name="WestVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(0, 2300)
-polygon = PackedVector2Array(-16, -2300, 16, -2300, 16, 2300, -16, 2300)
+position = Vector2(0, 3200)
+polygon = PackedVector2Array(-16, -3200, 16, -3200, 16, 3200, -16, 3200)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="East" type="CollisionShape2D" parent="Walls"]
-position = Vector2(7200, 2300)
+position = Vector2(7200, 3200)
 shape = SubResource("VerticalWall")
 
 [node name="EastVisual" type="Polygon2D" parent="Walls"]
-position = Vector2(7200, 2300)
-polygon = PackedVector2Array(-16, -2300, 16, -2300, 16, 2300, -16, 2300)
+position = Vector2(7200, 3200)
+polygon = PackedVector2Array(-16, -3200, 16, -3200, 16, 3200, -16, 3200)
 color = Color(0.12, 0.25, 0.28, 1)
 
 [node name="Obstacles" type="Node2D" parent="."]
@@ -294,7 +295,7 @@ position_smoothing_speed = 10.0
 limit_left = 0
 limit_top = 0
 limit_right = 7200
-limit_bottom = 4600
+limit_bottom = 6400
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -695,4 +696,15 @@ offset_bottom = 2130.0
 theme_override_font_sizes/font_size = 23
 theme_override_colors/font_color = Color(0.85, 0.55, 1, 1)
 text = "06 FAR EAST / NEW ENEMIES >"
+mouse_filter = 2
+
+[node name="EnvironmentField" parent="." instance=ExtResource("environment")]
+[node name="EnvironmentGuide" type="Label" parent="Wayfinding"]
+offset_left = 2150.0
+offset_top = 3160.0
+offset_right = 2900.0
+offset_bottom = 3260.0
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 0.65, 0.3, 1)
+text = "07 ENVIRONMENT / CONTINUE SOUTH v"
 mouse_filter = 2

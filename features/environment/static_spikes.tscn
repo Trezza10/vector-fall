@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://features/environment/obstacle_base.tscn" id="base"]
+[node name="StaticSpikes" instance=ExtResource("base")]
+[node name="Spike0" type="Polygon2D" parent="Danger"]
+position = Vector2(-70, 0)
+polygon = PackedVector2Array(-28, 40, 0, -42, 28, 40)
+color = Color(1, 1, 1, 0.3)
+[node name="Tip0" type="Line2D" parent="Danger"]
+position = Vector2(-70, 0)
+points = PackedVector2Array(-28, 40, 0, -42, 28, 40, -28, 40)
+width = 2.0
+default_color = Color(1, 1, 1, 0.9)
+[node name="Spike1" type="Polygon2D" parent="Danger"]
+position = Vector2(0, 0)
+polygon = PackedVector2Array(-28, 40, 0, -42, 28, 40)
+color = Color(1, 1, 1, 0.3)
+[node name="Tip1" type="Line2D" parent="Danger"]
+position = Vector2(0, 0)
+points = PackedVector2Array(-28, 40, 0, -42, 28, 40, -28, 40)
+width = 2.0
+default_color = Color(1, 1, 1, 0.9)
+[node name="Spike2" type="Polygon2D" parent="Danger"]
+position = Vector2(70, 0)
+polygon = PackedVector2Array(-28, 40, 0, -42, 28, 40)
+color = Color(1, 1, 1, 0.3)
+[node name="Tip2" type="Line2D" parent="Danger"]
+position = Vector2(70, 0)
+points = PackedVector2Array(-28, 40, 0, -42, 28, 40, -28, 40)
+width = 2.0
+default_color = Color(1, 1, 1, 0.9)

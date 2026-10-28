@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://features/environment/obstacle_base.tscn" id="base"]
+[node name="ShockTile" instance=ExtResource("base")]
+kind = 2
+damage = 3
+effect = 3
+effect_duration = 0.35
+warning_time = 1.0
+active_time = 1.1
+cooldown_time = 2.5
+accent = Color(0.3, 0.85, 1, 1)
+[node name="Circuit" type="Line2D" parent="."]
+points = PackedVector2Array(-90, 40, -60, 40, -60, -40, -20, -40, -20, 40, 20, 40, 20, -40, 60, -40, 60, 40, 90, 40)
+width = 2.0
+default_color = Color(0.2, 0.6, 0.7, 0.5)
+[node name="Glow" type="Polygon2D" parent="Danger"]
+polygon = PackedVector2Array(-100, -60, 100, -60, 100, 60, -100, 60)
+color = Color(1, 1, 1, 0.3)
+[node name="Bolt" type="Line2D" parent="Danger"]
+points = PackedVector2Array(15, -50, -20, 0, 20, 0, -15, 50)
+width = 6.0
+default_color = Color(1, 1, 1, 1)

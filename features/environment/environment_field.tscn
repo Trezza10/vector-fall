@@ -1,0 +1,148 @@
+[gd_scene load_steps=8 format=3]
+[ext_resource type="Script" path="res://features/environment/environment_field.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/environment/static_spikes.tscn" id="static_spikes"]
+[ext_resource type="PackedScene" path="res://features/environment/pressure_spikes.tscn" id="pressure_spikes"]
+[ext_resource type="PackedScene" path="res://features/environment/shock_tile.tscn" id="shock_tile"]
+[ext_resource type="PackedScene" path="res://features/environment/laser_gate.tscn" id="laser_gate"]
+[ext_resource type="PackedScene" path="res://features/environment/cover_block.tscn" id="cover_block"]
+[ext_resource type="PackedScene" path="res://features/pickups/healing_pickup.tscn" id="repair"]
+[node name="EnvironmentField" type="Node2D"]
+script = ExtResource("script")
+
+[node name="StaticA" parent="." instance=ExtResource("static_spikes")]
+position = Vector2(2075, 4050)
+
+[node name="StaticB" parent="." instance=ExtResource("static_spikes")]
+position = Vector2(2075, 4320)
+
+[node name="StaticC" parent="." instance=ExtResource("static_spikes")]
+position = Vector2(2075, 4590)
+
+[node name="PressureA" parent="." instance=ExtResource("pressure_spikes")]
+position = Vector2(3125, 4050)
+
+[node name="PressureB" parent="." instance=ExtResource("pressure_spikes")]
+position = Vector2(3125, 4490)
+
+[node name="ShockA" parent="." instance=ExtResource("shock_tile")]
+position = Vector2(4175, 4050)
+
+[node name="ShockB" parent="." instance=ExtResource("shock_tile")]
+position = Vector2(4175, 4490)
+phase_delay = 1.7
+
+[node name="LaserGate" parent="." instance=ExtResource("laser_gate")]
+position = Vector2(2325, 5500)
+
+[node name="CoverA" parent="." instance=ExtResource("cover_block")]
+position = Vector2(3500, 5250)
+
+[node name="CoverB" parent="." instance=ExtResource("cover_block")]
+position = Vector2(4250, 5500)
+
+[node name="CoverC" parent="." instance=ExtResource("cover_block")]
+position = Vector2(3500, 5750)
+
+[node name="Repair" parent="." instance=ExtResource("repair")]
+position = Vector2(3100, 3410)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 1600.0
+offset_top = 3300.0
+offset_right = 2950.0
+offset_bottom = 3450.0
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(1, 0.65, 0.3, 1)
+text = "07 / ENVIRONMENTAL OBSTACLES
+Watch the warnings. Cross during safe windows."
+mouse_filter = 2
+
+[node name="StaticBay" type="Node2D" parent="."]
+position = Vector2(1650, 3650)
+
+[node name="Border" type="Line2D" parent="StaticBay"]
+points = PackedVector2Array(0, 0, 850, 0, 850, 1150, 0, 1150, 0, 0)
+width = 2.0
+default_color = Color(0.9, 0.55, 0.3, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="StaticBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 820.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 26
+text = "STATIC SPIKES\nAlways live / avoid the marked beds."
+mouse_filter = 2
+
+[node name="PressureBay" type="Node2D" parent="."]
+position = Vector2(2700, 3650)
+
+[node name="Border" type="Line2D" parent="PressureBay"]
+points = PackedVector2Array(0, 0, 850, 0, 850, 1150, 0, 1150, 0, 0)
+width = 2.0
+default_color = Color(0.9, 0.55, 0.3, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="PressureBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 820.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 26
+text = "HIDDEN SPIKES\nStep on the hatch / warning / spikes / rearm."
+mouse_filter = 2
+
+[node name="ShockBay" type="Node2D" parent="."]
+position = Vector2(3750, 3650)
+
+[node name="Border" type="Line2D" parent="ShockBay"]
+points = PackedVector2Array(0, 0, 850, 0, 850, 1150, 0, 1150, 0, 0)
+width = 2.0
+default_color = Color(0.9, 0.55, 0.3, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="ShockBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 820.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 26
+text = "PULSE TILES\nCyan shock / brief stun / timed safe windows."
+mouse_filter = 2
+
+[node name="LaserBay" type="Node2D" parent="."]
+position = Vector2(1650, 5000)
+
+[node name="Border" type="Line2D" parent="LaserBay"]
+points = PackedVector2Array(0, 0, 1350, 0, 1350, 1150, 0, 1150, 0, 0)
+width = 2.0
+default_color = Color(0.9, 0.55, 0.3, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="LaserBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 1320.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 26
+text = "LASER CROSSING\nThin warning / live beam / safe cooldown."
+mouse_filter = 2
+
+[node name="CoverBay" type="Node2D" parent="."]
+position = Vector2(3250, 5000)
+
+[node name="Border" type="Line2D" parent="CoverBay"]
+points = PackedVector2Array(0, 0, 1350, 0, 1350, 1150, 0, 1150, 0, 0)
+width = 2.0
+default_color = Color(0.9, 0.55, 0.3, 0.3)
+z_index = -2
+
+[node name="Guide" type="Label" parent="CoverBay"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 1320.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 26
+text = "SOLID COVER\nWeave around / blocks movement and rounds."
+mouse_filter = 2

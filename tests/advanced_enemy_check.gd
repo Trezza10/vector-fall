@@ -129,6 +129,7 @@ func _check() -> void:
 	assert(laser._phase == PlaygroundEnemy.Phase.HUNT, "Interrupted laser recovers")
 	laser._phase = PlaygroundEnemy.Phase.WINDUP
 	laser._phase_remaining = 0.5
+	laser.global_position = Vector2(5500, lab.get_node("Player/Camera2D").limit_bottom - 300)
 	laser._laser_direction = Vector2.DOWN
 	laser._update_laser(0.01)
 	assert(laser.get_node("Laser").points[1].y < laser.definition.attack_range, "World wall clips the laser")
